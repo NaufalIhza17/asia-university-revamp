@@ -151,15 +151,20 @@ export default function SignUp() {
                   "w-full text-center"
                 )}
               >
-                Don&apos;t have account?{" "}
-                <a href="" className="underline">
-                  Sign Up
+                Have an account?{" "}
+                <a href="/login" className="underline">
+                  Login
                 </a>
               </p>
             </div>
           </div>
         </div>
-        <div className={cn("absolute min-w-max h-screen overflow-hidden", isShortinWidth ? "-top-[40%] -right-1/4" : "-right-1/4 2xl:right-0")}>
+        <div
+          className={cn(
+            "absolute min-w-max h-screen overflow-hidden",
+            isShortinWidth ? "-top-[40%] -right-1/4" : "-right-1/4 2xl:right-0"
+          )}
+        >
           <Image src={LoginSignUpBG} alt="" className="w-full h-full" />
         </div>
       </section>

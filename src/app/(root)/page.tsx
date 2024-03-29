@@ -1,9 +1,9 @@
-import SignUp from "../signup/page";
-
 export default function Home() {
   return (
-    <main>
-      <SignUp />
+    <main className="flex items-center justify-center h-screen">
+      <div>
+        <a href="/login">Login</a> | <a href="/signup">SignUp</a>
+      </div>
     </main>
   );
 }

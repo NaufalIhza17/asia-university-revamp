@@ -1,4 +1,5 @@
 import AULogo from "./au-logo.svg";
+import AULogoOnly from "./au-logo-only.webp";
 import MenuNavbar from "./menu-navbar.svg";
 import GraduationCap from "./graduation-cap.svg";
 import DashboardIcon from "./dashboard-icon.svg";
@@ -10,6 +11,7 @@ import LogoutIcon from "./logout.svg";
 
 export {
   AULogo,
+  AULogoOnly,
   MenuNavbar,
   GraduationCap,
   DashboardIcon,

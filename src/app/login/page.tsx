@@ -5,8 +5,7 @@ import Image from "next/image";
 import { LoginSignUpBG } from "~/public/images";
 import useWindowHeight from "@/hooks/useWindowHeight";
 import useWindowWidth from "@/hooks/useWindowWidth";
-import { cn } from "@/hooks/cn";
-import clsx from "clsx";
+import { cn } from "@/hooks/cn"
 
 export default function SignUp() {
   const windowHeight = useWindowHeight();
@@ -136,8 +135,8 @@ export default function SignUp() {
                 )}
               >
                 Don&apos;t have an account?{" "}
-                <a href="/login" className="underline">
-                  Login
+                <a href="/signup" className="underline">
+                  Signup
                 </a>
               </p>
             </div>

@@ -18,6 +18,9 @@ const config: Config = {
       fontFamily: {
         satoshi: ["Satoshi", ...fontFamily.sans],
       },
+      gridTemplateColumns: {
+        '20': 'repeat(20, minmax(0, 1fr))',
+      },
     },
   },
   plugins: [],

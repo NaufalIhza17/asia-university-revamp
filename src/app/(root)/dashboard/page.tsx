@@ -1,10 +1,3 @@
-import { Navbar } from "@/components";
-
-export default function Dashboard() {
-  return (
-    <main>
-      <Navbar />
-      <section></section>
-    </main>
-  );
+export default function DashboardHome() {
+  return <section className="text-black">Dashboard Main</section>;
 }

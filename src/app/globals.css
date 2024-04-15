@@ -41,3 +41,16 @@
   padding-eft: 16px;
   padding-right: 16px;
 }
+
+tr:nth-child(odd) {background-color: #f0f0f0;}
+
+table{
+  border: #c1c1c1;
+  border-collapse: collapse;
+}
+th, td{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  padding-right: 40px;
+}

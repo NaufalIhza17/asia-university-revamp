@@ -20,16 +20,16 @@ export default function Payment() {
         <table className="table-auto border border-gray-300 rounded-lg">
           <tbody>
             <tr>
-              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] w-48" style={{ width: '200px' }}>Nama</td>
-              <td className="text-left pl-8 py-2 border border-gray-300 text-[#123E44]">Lorem Ipsum</td>
+              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] bg-white w-48" style={{ width: '200px' }}>Name</td>
+              <td className="text-left pl-8 py-2 border border-gray-300 text-[#123E44] bg-white">Lorem Ipsum</td>
             </tr>
             <tr className="bg-[#F0F0F0]">
               <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] w-48" style={{ width: '200px' }}>Student ID</td>
               <td className="text-left pl-8 py-2 border border-gray-300 text-[#123E44]">Lorem Ipsum</td>
             </tr>
             <tr>
-              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] w-48" style={{ width: '200px' }}>Academic Year</td>
-              <td className="text-left pl-8 py-2 border border-gray-300 text-[#123E44]">
+              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] bg-white w-48" style={{ width: '200px' }}>Academic Year</td>
+              <td className="text-left pl-8 py-2 border border-gray-300 text-[#123E44] bg-white">
                 <select className="border border-gray-300 rounded-md px-2 py-1 bg-white">
                   <option value="I">I</option>
                   <option value="II">II</option>

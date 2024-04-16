@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Footer } from "@/components";
 import {
   DashboardIcon,
@@ -10,19 +10,47 @@ import {
   AUNewsIcon,
   LogoutIcon,
 } from "~/public/icons";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { cn } from "@/hooks/cn";
 import { dashboardPath } from "@/staticData/dashboardPath";
+import Cookies from "js-cookie";
 
 export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
+    !!Cookies.get("ACCESS_TOKEN")
+  );
+  const [isPopUp, setIsPopUp] = useState(true);
   const pathname = usePathname();
+  const onClickLogout = () => {
+    Cookies.remove("ACCESS_TOKEN");
+    Cookies.remove("REFRESH_TOKEN");
+    setIsLoggedIn(false);
+  };
+
+  const togglePopUp = () => {
+    setIsPopUp(!isPopUp);
+  };
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      redirect("/login");
+    }
+  }, [isLoggedIn]);
 
   return (
-    <>
+    <main className="relative">
+      <div
+        className={cn(
+          "absolute z-50  p-5 rounded-2xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2",
+          !isPopUp && "hidden"
+        )}
+      >
+        a
+      </div>
       <Navbar isSearch />
       <section className="grid grid-cols-20 py-12 layout">
         <div className="col-start-2 col-end-[20] flex gap-12 h-fit">
@@ -52,12 +80,18 @@ export default function Layout({
                     {path.name === "AU News" && (
                       <AUNewsIcon className="w-[26px] h-[26px]" />
                     )}
-                    {path.name === "Logout" && (
-                      <LogoutIcon className="w-[26px] h-[26px]" />
-                    )}
                     <a href={path.slug}>{path.name}</a>
                   </div>
                 ))}
+                <div
+                  className={cn(
+                    "flex gap-3 text-white/50 fill-white/50 hover:text-white hover:fill-white transition-all delay-75 hover:bg-white/10 p-5"
+                  )}
+                  onClick={() => onClickLogout()}
+                >
+                  <LogoutIcon className="w-[26px] h-[26px]" />
+                  <p>Logout</p>
+                </div>
               </div>
             </div>
           </div>
@@ -65,6 +99,6 @@ export default function Layout({
         </div>
       </section>
       <Footer />
-    </>
+    </main>
   );
 }

@@ -1,3 +1,5 @@
+"use client"
+
 import getDateValue from "@/hooks/getDateValue";
 import { DashboardBannerMain } from "~/public/images";
 

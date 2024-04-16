@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Login | Asia University',
+  title: 'Sign Up | Asia University',
   description: '',
 }
 

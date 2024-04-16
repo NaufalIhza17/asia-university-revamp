@@ -19,8 +19,4 @@ export const dashboardPath = [
     slug: "/dashboard/news",
     name: "AU News"
   },
-  {
-    slug: "/logout",
-    name: "Logout"
-  },
 ];

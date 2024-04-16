@@ -1,12 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { LoginSignUpBG } from "~/public/images";
 import useWindowHeight from "@/hooks/useWindowHeight";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { cn } from "@/hooks/cn";
-import clsx from "clsx";
+import { signupRequest } from "@/services/auth";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
   const windowHeight = useWindowHeight();
@@ -25,8 +28,45 @@ export default function SignUp() {
       setIsShortinHeight(false);
     }
   }, [windowHeight, windowWidth]);
+
+  const [formData, setFormData] = useState({
+    full_name: "",
+    email: "",
+    password: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const onClickSignUp = async (e: SyntheticEvent) => {
+    try {
+      setIsLoading(true);
+      e.preventDefault();
+      const res = await signupRequest(formData);
+      console.log(isLoading)
+      console.log(res)
+      if (res?.data?.InsertedID) {
+        toast.success("Account successfully created");
+        const redirectTimer = setTimeout(() => {
+          router.push("/login");
+        }, 5000);
+        return () => clearTimeout(redirectTimer);
+      } else {
+        console.error("SIGNUP ERROR");
+        setIsLoading(false);
+      }
+    } catch (err: any) {
+      setIsLoading(false);
+      if (err.response?.data?.message) {
+        toast.error(`Register failed: ${err.response.data.message}`);
+        console.log("Register Error: ", err.response.data.message);
+      } else {
+        toast.error("Register failed: An unknown error occurred");
+        console.log("Register Error: Unknown error", err);
+      }
+    }
+  };
   return (
     <main className="relative">
+      <ToastContainer position="top-right" autoClose={5000} />
       <section
         id="Sign Up"
         className={cn(
@@ -56,7 +96,7 @@ export default function SignUp() {
               Get Started Now
             </h1>
             <form
-              action=""
+              action="POST"
               className={`flex flex-col justify-start ${
                 isShortinHeight ? "gap-3" : "gap-5"
               }`}
@@ -68,9 +108,16 @@ export default function SignUp() {
                 Name
               </label>
               <input
+                id="full_name"
+                name="full_name"
                 type="text"
+                required
                 placeholder="Enter your name"
                 className="border border-black/10 rounded-xl p-2 font-medium text-sm placeholder:text-black/20"
+                onChange={(e) => setFormData({
+                  ...formData,
+                  full_name: e.target.value
+                })}
               />
               <label
                 htmlFor="email-adress"
@@ -79,9 +126,18 @@ export default function SignUp() {
                 Email address
               </label>
               <input
+                id="email"
+                name="email"
                 type="email"
+                required
                 placeholder="Enter your email"
                 className="border border-black/10 rounded-xl p-2 font-medium text-sm placeholder:text-black/20"
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    email: e.target.value,
+                  })
+                }
               />
               <label
                 htmlFor="password"
@@ -90,9 +146,18 @@ export default function SignUp() {
                 Password
               </label>
               <input
+                id="password"
+                name="password"
                 type="password"
-                placeholder="Enter your password"
+                required
+                placeholder="Create your password"
                 className="border border-black/10 rounded-xl p-2 font-medium text-sm placeholder:text-black/20"
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    password: e.target.value,
+                  })
+                }
               />
               <div className="flex gap-1">
                 <input type="checkbox" className="w-fit" />
@@ -106,15 +171,24 @@ export default function SignUp() {
                   </a>
                 </p>
               </div>
-              <button className="p-2 w-full bg-[#36967E] rounded-xl mt-3">
-                <p
-                  className={cn(
-                    isShortinWidth ? `text-sm` : ``,
-                    `font-bold text-white`
-                  )}
-                >
-                  Signup
-                </p>
+              <button
+                type="submit"
+                className="p-2 w-full bg-[#36967E] rounded-xl mt-3 flex justify-center"
+                onClick={onClickSignUp}
+                disabled={isLoading}
+              >
+                {!isLoading ? (
+                  <p
+                    className={cn(
+                      isShortinWidth ? `text-sm` : ``,
+                      `font-bold text-white`
+                    )}
+                  >
+                    Signup
+                  </p>
+                ) : (
+                  <div className="border-gray-300 h-6 w-6 animate-spin rounded-full border-2 border-t-emerald-800" />
+                )}
               </button>
             </form>
             <div className="border-b-2 border-black/10 relative">
@@ -165,7 +239,12 @@ export default function SignUp() {
             isShortinWidth ? "-top-[40%] -right-1/4" : "-right-1/4 2xl:right-0"
           )}
         >
-          <Image src={LoginSignUpBG} alt="" className="w-full h-full" />
+          <Image
+            src={LoginSignUpBG}
+            alt=""
+            className="w-full h-full"
+            priority
+          />
         </div>
       </section>
     </main>

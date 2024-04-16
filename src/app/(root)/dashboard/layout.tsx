@@ -20,8 +20,8 @@ export default function Layout({
     <>
       <Navbar isSearch />
       <section className="grid grid-cols-20 py-12 layout">
-        <div className="col-start-2 col-end-[20] flex gap-12 h-fit">
-          <div className="min-w-[220px] max-w-[320px] bg-gradient-to-b from-[#36967E] to-[#4AA39F] rounded-3xl lg:flex flex-col justify-center items-center py-11 font-satoshi hidden">
+        <div className="col-start-2  col-end-[20] flex gap-12 h-fit">
+          <div className="min-w-[220px] max-w-[320px] bg-gradient-to-b from-[#36967E] to-[#4AA39F] rounded-3xl lg:flex flex-col justify-center items-center py-11 font-satoshi hidden h-fit">
             <div className="flex flex-col gap-8 w-full items-center justify-center">
               <div className="flex flex-col gap-5">
                 <div className="flex gap-3 text-white/50 fill-white/50 hover:text-white hover:fill-white transition-all delay-75 hover:bg-white/10 p-5">

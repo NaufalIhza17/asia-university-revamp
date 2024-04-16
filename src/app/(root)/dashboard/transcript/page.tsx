@@ -107,7 +107,7 @@ export default function Transcript() {
               {
         showhide==='2' &&(
       <><div className="flex-col font-satoshi relative z-50" id="yearly">
-            <p className="text-4xl font-bold text-center text-emerald-800 flex-auto">Yearly Grades Transcript</p>
+            <p className="text-4xl font-bold text-center text-emerald-800">Yearly Grades Transcript</p>
             <table className="table-auto w-full hover:border-spacing-4 mt-9 text-green-800">
               <thead>
                 <tr>

@@ -31,7 +31,7 @@ export default function DashboardHome() {
           className="absolute right-0 top-0"
         />
       </div>
-      <div className="grid grid-cols-4 gap-x-0 gap-y-7 mt-8">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 mt-8">
         {/* 6 Grid items */}
         <a
           href="https://aulib.asia.edu.tw/webpac/shelf_user.cfm"

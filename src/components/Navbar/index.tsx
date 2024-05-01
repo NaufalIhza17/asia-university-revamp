@@ -12,6 +12,7 @@ import {
   AUNewsIcon,
   LogoutIcon,
 } from "~/public/icons";
+import { allApps } from "@/staticData/allApps";
 
 interface NavbarProps {
   className?: string;
@@ -22,10 +23,15 @@ export default function Navbar({ className, isSearch = false }: NavbarProps) {
   const windowWidth = useWindowWidth();
   const [isSlide, setIsSlide] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isShowSearch, setIsShowSearch] = useState(false);
 
   const toogleSlide = () => {
     setIsSlide(!isSlide);
   };
+
+  const toogleShowSearch = () => {
+    setIsShowSearch(!isShowSearch)
+  }
 
   useEffect(() => {
     if (windowWidth < 1024) setIsMobile(true);
@@ -47,7 +53,7 @@ export default function Navbar({ className, isSearch = false }: NavbarProps) {
           ) : (
             <div
               className={cn(
-                "w-full flex items-center pr-2 lg:px-[clamp(0rem,-0.88rem+3.756vw,2.5rem)]",
+                "w-full flex items-center pr-2 lg:px-[clamp(0rem,-0.88rem+3.756vw,2.5rem)] relative",
                 isMobile ? "justify-end" : "justify-end"
               )}
             >
@@ -57,7 +63,15 @@ export default function Navbar({ className, isSearch = false }: NavbarProps) {
                   "border-transparent focus:border-transparent focus:ring-0 focus:outline-none"
                 )}
                 placeholder="Search..."
+                onFocus={toogleShowSearch}
               ></input>
+              <div className={cn( isShowSearch ? "block" : "hidden", "absolute z-40 top-12 shadow-lg bg-white rounded-2xl w-full max-w-[315px] h-fit overflow-hidden")}>
+                {allApps.map((path, idx) => (
+                  <div key={idx} className="group hover:bg-black transition-all">
+                    <p className="p-4 group-hover:text-white">{path.name}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
           {isSearch && isMobile && (

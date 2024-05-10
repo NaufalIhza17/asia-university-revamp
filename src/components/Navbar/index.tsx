@@ -7,7 +7,7 @@ import useWindowWidth from "@/hooks/useWindowWidth";
 import {
   DashboardIcon,
   PaymentInfoIcon,
-  TronclassIcon,
+  CourseInfoIcon,
   TranscriptIcon,
   AUNewsIcon,
   LogoutIcon,
@@ -88,8 +88,8 @@ export default function Navbar({ className, isSearch = false }: NavbarProps) {
             <a href="">Payment Info</a>
           </div>
           <div className="flex items-center justify-center gap-3 text-white/50 fill-white/50 hover:text-white hover:fill-white transition-all delay-75 hover:bg-white/10 py-2">
-            <TronclassIcon className="w-[20px] h-[20px]" />
-            <a href="">Tronclass</a>
+            <CourseInfoIcon className="w-[20px] h-[20px]" />
+            <a href="">Course Info</a>
           </div>
           <div className="flex items-center justify-center gap-3 text-white/50 fill-white/50 hover:text-white hover:fill-white transition-all delay-75 hover:bg-white/10 py-2">
             <TranscriptIcon className="w-[20px] h-[20px]" />

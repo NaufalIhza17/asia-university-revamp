@@ -8,8 +8,8 @@ export const dashboardPath = [
     name: "Payment Info"
   },
   {
-    slug: "/dashboard/tronclass",
-    name: "Tronclass"
+    slug: "/dashboard/course",
+    name: "Course Info"
   },
   {
     slug: "/dashboard/transcript",

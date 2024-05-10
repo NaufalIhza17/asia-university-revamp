@@ -10,6 +10,7 @@ import { Office365, GreenOffice365 } from "~/public/images";
 import { LearningActivities, GreenLearningActivities } from "~/public/images";
 import { AuEats, GreenAuEats } from "~/public/images";
 
+
 export default function DashboardHome() {
   const month = getDateValue({ options: "month" });
   const date = getDateValue({ options: "date" });
@@ -40,7 +41,7 @@ export default function DashboardHome() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 mt-8">
         <a
-          href="https://aulib.asia.edu.tw/webpac/shelf_user.cfm"
+          href="dashboard/portofolio"
           onMouseEnter={() => setIsPortofolioDataSelected(true)}
           onMouseLeave={() => setIsPortofolioDataSelected(false)}
         >

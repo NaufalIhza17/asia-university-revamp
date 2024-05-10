@@ -2,6 +2,7 @@ import LoginSignUpBG from "./login-signup-bg.jpg";
 import DashboardBannerMain from "./dashboard-banner-main.svg";
 import PaymentBannerMain from "./payment-banner-main.svg";
 import TranscriptBannerMain from"./transcript-banner-main.svg";
+import CourseBannerMain from "./course-banner.svg"
 import PrintIcon from "./print-icon.svg";
 import PortofolioData from "./portofolio-data-menu.svg";
 import LibraryProfile from "./library-profile-menu.svg";
@@ -15,12 +16,15 @@ import GreenSchoolLicensing from "./green-school-licensing-menu.svg";
 import GreenOffice365 from "./green-office-365-menu.svg";
 import GreenLearningActivities from "./green-learning-activities-menu.svg"
 import GreenAuEats from "./green-au-eats-menu.svg";
-
+import PortofolioIcon from "./portofolio-data.svg"
+import ResetIcon from "./reset-icon.svg"
+import QueryIcon from "./query-icon.svg"
 
 export {
     LoginSignUpBG,
     DashboardBannerMain,
     PaymentBannerMain,
+    CourseBannerMain,
     TranscriptBannerMain,
     PrintIcon,
     PortofolioData,
@@ -34,5 +38,8 @@ export {
     GreenSchoolLicensing,
     GreenOffice365,
     GreenLearningActivities,
-    GreenAuEats
+    GreenAuEats,
+    PortofolioIcon,
+    ResetIcon,
+    QueryIcon
 }

@@ -35,11 +35,11 @@ export default function Layout({
     setIsPopUp(!isPopUp);
   };
 
-  // useEffect(() => {
-  //   if (!isLoggedIn) {
-  //     redirect("/login");
-  //   }
-  // }, [isLoggedIn]);
+  useEffect(() => {
+    if (!isLoggedIn) {
+      redirect("/login");
+    }
+  }, [isLoggedIn]);
 
   return (
     <main className="relative">

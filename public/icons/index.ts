@@ -8,6 +8,10 @@ import CourseInfoIcon from "./course-info.svg";
 import TranscriptIcon from "./transcript.svg";
 import AUNewsIcon from "./au-news.svg";
 import LogoutIcon from "./logout.svg";
+import LandingBook from "./landing_book.svg";
+import LandingMoney from "./landing_money.svg";
+import LandingPeople from "./landing_people.svg";
+import LandingStudent from "./landing_student.svg";
 
 export {
   AULogo,
@@ -20,4 +24,8 @@ export {
   TranscriptIcon,
   AUNewsIcon,
   LogoutIcon,
+  LandingBook,
+  LandingMoney,
+  LandingPeople,
+  LandingStudent,
 };

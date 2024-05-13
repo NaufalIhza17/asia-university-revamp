@@ -5,7 +5,7 @@ import { Navbar, Footer } from "@/components";
 import {
   DashboardIcon,
   PaymentInfoIcon,
-  TronclassIcon,
+  CourseInfoIcon,
   TranscriptIcon,
   AUNewsIcon,
   LogoutIcon,
@@ -40,7 +40,7 @@ export default function Layout({
       redirect("/login");
     }
   }, [isLoggedIn]);
-
+  
   return (
     <main className="relative">
       <Navbar isSearch />
@@ -63,8 +63,8 @@ export default function Layout({
                     {path.name === "Payment Info" && (
                       <PaymentInfoIcon className="w-[26px] h-[26px]" />
                     )}
-                    {path.name === "Tronclass" && (
-                      <TronclassIcon className="w-[26px] h-[26px]" />
+                    {path.name === "Course Info" && (
+                      <CourseInfoIcon className="w-[26px] h-[26px]" />
                     )}
                     {path.name === "Transcript" && (
                       <TranscriptIcon className="w-[26px] h-[26px]" />

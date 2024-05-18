@@ -2,6 +2,7 @@ import { CourseBannerMain } from "~/public/images";
 import { ResetIcon } from "~/public/images";
 import { QueryIcon } from "~/public/images";
 
+
 export default function Course() {
   return (
     <section>
@@ -207,9 +208,12 @@ export default function Course() {
           </tbody>
         </table>
         <div className="flex mt-4">
-        <button className="flex items-center rounded-full bg-[#2D937C] text-white font-bold px-6 py-2 hover:bg-[#1D6F58] transition-colors duration-300" style={{ marginRight: "10px" }}>
-            <QueryIcon className="w-6 h-6 mr-2" /> Print Query
-          </button>
+        <a href="/dashboard/course/printquery"
+          className="flex items-center rounded-full bg-[#2D937C] text-white font-bold px-6 py-2 hover:bg-[#1D6F58] transition-colors duration-300"
+          style={{ marginRight: "10px" }}
+        >
+          <QueryIcon className="w-6 h-6 mr-2" /> Print Query
+        </a>
           <button className="flex items-center rounded-full bg-[#2D937C] text-white font-bold px-6 py-2 hover:bg-[#1D6F58] transition-colors duration-300">
             <ResetIcon className="w-6 h-6 mr-2" /> Reset
           </button>

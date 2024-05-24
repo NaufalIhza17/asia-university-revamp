@@ -15,7 +15,7 @@ import {
 import {
   AULogo,
   LandingBook,
-  LandingMoney,
+  LandingStar,
   LandingPeople,
   LandingStudent,
 } from "~/public/icons";
@@ -88,7 +88,7 @@ export default function Home() {
               />
             </div>
             <p className="lg:text-xl">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              Globally ranked among top universities
             </p>
           </motion.div>
           <motion.div
@@ -100,14 +100,14 @@ export default function Home() {
             className="grid items-center justify-center gap-[5px] lg:gap-[10px] bg-[#2F4B2C] px-[27.5px] lg:px-[55px] py-[58px] lg:py-[116px]"
           >
             <div className="w-full flex justify-center">
-              <LandingMoney
+              <LandingStar
                 width={64}
                 height={64}
                 className="max-lg:w-[40px]"
               />
             </div>
             <p className="lg:text-xl">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              Top-5 university in Taiwan for three years
             </p>
           </motion.div>
           <motion.div
@@ -122,7 +122,7 @@ export default function Home() {
               <LandingBook width={64} height={64} className="max-lg:w-[40px]" />
             </div>
             <p className="lg:text-xl">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              Numerous international awards for creativity.
             </p>
           </motion.div>
           <motion.div
@@ -141,7 +141,7 @@ export default function Home() {
               />
             </div>
             <p className="lg:text-xl">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit
+              World-class faculty with over 60 full professors
             </p>
           </motion.div>
         </div>
@@ -195,11 +195,10 @@ export default function Home() {
               />
               <div className="opacity-0 absolute z-10 top-0 left-0 w-full h-full bg-[#82684B]/50 text-white group-hover:opacity-100 transition-opacity delay-200 flex flex-col gap-4 xl:gap-6 py-8 xl:py-16 px-4 xl:px-8">
                 <p className="text-xl">
-                  <span className="text-[#CAFF86]">&#47;&#47;</span> Student Hall
+                  <span className="text-[#CAFF86]">&#47;&#47;</span> Scenic Campus
                 </p>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Asia University's campus is adorned with scenic buildings that blend modern design with classical Roman-Greek elements.
                 </p>
               </div>
             </motion.div>
@@ -220,11 +219,10 @@ export default function Home() {
               />
               <div className="opacity-0 absolute z-10 top-0 left-0 w-full h-full bg-[#82684B]/50 text-white group-hover:opacity-100 transition-opacity delay-200 flex flex-col gap-4 xl:gap-6 py-8 xl:py-16 px-4 xl:px-8">
                 <p className="text-xl">
-                  <span className="text-[#CAFF86]">&#47;&#47;</span> Student Hall
+                  <span className="text-[#CAFF86]">&#47;&#47;</span> Faculty Building
                 </p>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  The faculty buildings are architecturally impressive, providing state-of-the-art facilities for academic excellence.
                 </p>
               </div>
             </motion.div>
@@ -245,11 +243,10 @@ export default function Home() {
               />
               <div className="opacity-0 absolute z-10 top-0 left-0 w-full h-full bg-[#82684B]/50 text-white group-hover:opacity-100 transition-opacity delay-200 flex flex-col gap-4 xl:gap-6 py-8 xl:py-16 px-4 xl:px-8">
                 <p className="text-xl">
-                  <span className="text-[#CAFF86]">&#47;&#47;</span> Student Hall
+                  <span className="text-[#CAFF86]">&#47;&#47;</span> Campus View
                 </p>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  The campus view is breathtaking, with picturesque landscapes and serene gardens.
                 </p>
               </div>
             </motion.div>
@@ -272,11 +269,10 @@ export default function Home() {
               />
               <div className="opacity-0 absolute z-10 top-0 left-0 w-full h-full bg-[#82684B]/50 text-white group-hover:opacity-100 transition-opacity delay-200 flex flex-col gap-4 xl:gap-6 py-8 xl:py-16 px-4 xl:px-8">
                 <p className="text-xl">
-                  <span className="text-[#CAFF86]">&#47;&#47;</span> Student Hall
+                  <span className="text-[#CAFF86]">&#47;&#47;</span> Dormitory
                 </p>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  The dormitories offer a comfortable and well-equipped living environment for students.
                 </p>
               </div>
             </motion.div>
@@ -297,11 +293,10 @@ export default function Home() {
               />
               <div className="opacity-0 absolute z-10 top-0 left-0 w-full h-full bg-[#82684B]/50 text-white group-hover:opacity-100 transition-opacity delay-200 flex flex-col gap-4 xl:gap-6 py-8 xl:py-16 px-4 xl:px-8">
                 <p className="text-xl">
-                  <span className="text-[#CAFF86]">&#47;&#47;</span> Student Hall
+                  <span className="text-[#CAFF86]">&#47;&#47;</span> Ando Museum
                 </p>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  The Ando Museum, designed by Tadao Ando, is a cultural gem on campus, hosting regular art exhibitions.
                 </p>
               </div>
             </motion.div>
@@ -324,10 +319,10 @@ export default function Home() {
             about us
           </h1>
           <p className="max-w-[583px] font-medium text-xl lg:text-2xl text-white">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Asia University is celebrated for its rapid rise in global university rankings, earning praise for its academic 
+            excellence, distinguished faculty, and innovative achievements. Our commitment to internationalization and 
+            collaboration, coupled with an award-winning, aesthetically pleasing campus, has garnered admiration from educators, 
+            students, and academic leaders worldwide.
           </p>
           <motion.div
             variants={fadeInAnimationVariationsScale}
@@ -385,7 +380,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-black-2 w-full text-white flex justify-center px-10 py-20 text-center">
+      <section className="bg-[#3D5F4E] w-full text-white flex justify-center px-10 py-20 text-center">
         <p>
           © 2024 Asia University Website
           <br />

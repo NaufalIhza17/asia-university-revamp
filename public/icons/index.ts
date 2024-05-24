@@ -12,6 +12,7 @@ import LandingBook from "./landing_book.svg";
 import LandingMoney from "./landing_money.svg";
 import LandingPeople from "./landing_people.svg";
 import LandingStudent from "./landing_student.svg";
+import LandingStar from "./landing_star.svg";
 
 export {
   AULogo,
@@ -28,4 +29,5 @@ export {
   LandingMoney,
   LandingPeople,
   LandingStudent,
+  LandingStar,
 };

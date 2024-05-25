@@ -1,17 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AULogo, MenuNavbar } from "~/public/icons";
 import { cn } from "@/hooks/cn";
 import useWindowWidth from "@/hooks/useWindowWidth";
-import {
-  DashboardIcon,
-  PaymentInfoIcon,
-  CourseInfoIcon,
-  TranscriptIcon,
-  AUNewsIcon,
-  LogoutIcon,
-} from "~/public/icons";
+import AULogo from "~/public/icons/au-logo.svg"
+import MenuNavbar from "~/public/icons/menu-navbar.svg"
+import DashboardIcon from "~/public/icons/dashboard-icon.svg"
+import PaymentInfoIcon from "~/public/icons/payment-info.svg"
+import CourseInfoIcon from "~/public/icons/course-info.svg"
+import TranscriptIcon from "~/public/icons/transcript.svg"
+import AUNewsIcon from "~/public/icons/au-news.svg"
+import LogoutIcon from "~/public/icons/logout.svg"
 import { allApps } from "@/staticData/allApps";
 
 interface NavbarProps {
@@ -24,15 +23,22 @@ export default function Navbar({ className, isSearch = false }: NavbarProps) {
   const [isSlide, setIsSlide] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isShowSearch, setIsShowSearch] = useState(false);
+  const [searchResults, setSearchResults] = useState(allApps);
 
   const toogleSlide = () => {
     setIsSlide(!isSlide);
   };
 
-  const toogleShowSearch = () => {
-    setIsShowSearch(!isShowSearch)
-  }
-
+  const toogleShowSearchInput = (event: any) => {
+    const inputValue = event.target.value;
+    setIsShowSearch(inputValue !== "");
+    setSearchResults(
+      allApps.filter((app) =>
+        app.name.toLowerCase().includes(inputValue.toLowerCase())
+      )
+    );
+  };
+  
   useEffect(() => {
     if (windowWidth < 1024) setIsMobile(true);
     else setIsMobile(false);
@@ -63,10 +69,10 @@ export default function Navbar({ className, isSearch = false }: NavbarProps) {
                   "border-transparent focus:border-transparent focus:ring-0 focus:outline-none"
                 )}
                 placeholder="Search..."
-                onFocus={toogleShowSearch}
+                onChange={toogleShowSearchInput}
               ></input>
               <div className={cn( isShowSearch ? "block" : "hidden", "absolute z-40 top-12 shadow-lg bg-white rounded-2xl w-full max-w-[315px] h-fit overflow-hidden")}>
-                {allApps.map((path, idx) => (
+                {searchResults.map((path, idx) => (
                   <div key={idx} className="group hover:bg-black transition-all">
                     <p className="p-4 group-hover:text-white">{path.name}</p>
                   </div>
@@ -79,7 +85,7 @@ export default function Navbar({ className, isSearch = false }: NavbarProps) {
               className="flex items-center justify-end"
               onClick={toogleSlide}
             >
-              <MenuNavbar className="min-w-[32px] min-h-[32px] rounded-full border-2 border-white" />
+              <MenuNavbar className={`min-w-[32px] min-h-[32px] rounded-full border-2 border-white ${isSlide ? "fill-[#36967E] bg-white" : "fill-white"}`} />
             </div>
           )}
         </div>
@@ -88,7 +94,7 @@ export default function Navbar({ className, isSearch = false }: NavbarProps) {
       {/* Menu */}
       <div
         className={cn(
-          "absolute left-0 top-[4.7rem] md:top-[5.9rem] h-fit w-full bg-[#53c4a7] transition-transform py-2 flex justify-center",
+          "absolute z-20 left-0 top-[4.7rem] md:top-[5.9rem] h-fit w-full bg-[#53c4a7] transition-transform py-2 flex justify-center",
           isSlide && isMobile ? "translate-x-0" : "-translate-x-full"
         )}
       >

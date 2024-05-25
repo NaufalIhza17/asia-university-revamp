@@ -1,4 +1,4 @@
-import { PortofolioIcon } from "~/public/images";
+import PortofolioIcon from '~/public/images/portofolio-data.svg'
 
 export default function Portofolio() {
   return (

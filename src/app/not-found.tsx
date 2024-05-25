@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AULogoOnly } from "~/public/icons";
+import AULogoOnly from "~/public/icons/au-logo-only.webp"
 
 export default function NotFound() {
   return (

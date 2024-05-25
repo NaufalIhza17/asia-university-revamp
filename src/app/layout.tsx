@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { UserProvider } from "@/hooks/userContext";
 
 export const metadata: Metadata = {
   title: "Asia University",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-satoshi">{children}</body>
+      <UserProvider>
+        <body className="font-satoshi">{children}</body>
+      </UserProvider>
     </html>
   );
 }

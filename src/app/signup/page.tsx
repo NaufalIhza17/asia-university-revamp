@@ -2,7 +2,7 @@
 
 import { SyntheticEvent, useEffect, useState } from "react";
 import Image from "next/image";
-import { LoginSignUpBG } from "~/public/images";
+import LoginSignUpBG from "~/public/images/login-signup-bg.jpg";
 import useWindowHeight from "@/hooks/useWindowHeight";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { cn } from "@/hooks/cn";
@@ -68,7 +68,6 @@ export default function SignUp() {
     <main className="relative">
       <ToastContainer position="top-right" autoClose={5000} />
       <section
-        id="Sign Up"
         className={cn(
           isShortinWidth ? `items-end` : `items-center`,
           `flex justify-between w-screen h-screen relative overflow-hidden`

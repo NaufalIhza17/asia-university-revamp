@@ -1,28 +1,31 @@
 "use client";
 
-import { useEffect, useState, SyntheticEvent } from "react";
-import { loginRequest } from "@/services/auth";
-import Cookies from "js-cookie";
 import Image from "next/image";
-import { LoginSignUpBG } from "~/public/images";
+import { useEffect, useState, SyntheticEvent } from "react";
+import Cookies from "js-cookie";
+import { loginRequest } from "@/services/auth";
+import LoginSignUpBG from "~/public/images/login-signup-bg.jpg";
+import { toast, ToastContainer } from "react-toastify";
+import { useRouter } from "next/navigation";
+import "react-toastify/dist/ReactToastify.css";
+import { cn } from "@/hooks/cn";
 import useWindowHeight from "@/hooks/useWindowHeight";
 import useWindowWidth from "@/hooks/useWindowWidth";
-import { cn } from "@/hooks/cn";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/navigation";
+import { useUser } from "@/hooks/userContext";
 
 export default function SignUp() {
   const windowHeight = useWindowHeight();
   const windowWidth = useWindowWidth();
   const [isShortinHeight, setIsShortinHeight] = useState(false);
   const [isShortinWidth, setIsShortinWidth] = useState(false);
+  const { setUser } = useUser();
   useEffect(() => {
     if (windowWidth <= 690) {
       setIsShortinWidth(true);
     } else {
       setIsShortinWidth(false);
     }
+
     if (windowHeight <= 780) {
       setIsShortinHeight(true);
     } else {
@@ -42,12 +45,23 @@ export default function SignUp() {
       setIsLoading(true);
       e.preventDefault();
       const res = await loginRequest(formData);
+      console.log(res.data);
       if (res?.data?.token) {
         Cookies.set("ACCESS_TOKEN", res.data.token);
         Cookies.set("REFRESH_TOKEN", res.data.refresh_token);
+        setUser({
+          full_name: res.data.full_name,
+          email: res.data.email,
+          user_id: res.data.user_id,
+          is_admin: res.data.is_admin,
+        });
         toast.success("Login successfully");
         const redirectTimer = setTimeout(() => {
-          router.push("/dashboard");
+          if (res.data.is_admin) {
+            router.push("/admin/dashboard");
+          } else {
+            router.push("/dashboard");
+          }
         }, 2000);
         return () => clearTimeout(redirectTimer);
       } else {
@@ -70,7 +84,6 @@ export default function SignUp() {
     <main className="relative">
       <ToastContainer position="top-right" autoClose={3000} />
       <section
-        id="Sign Up"
         className={cn(
           isShortinWidth ? `items-end` : `items-center`,
           `flex justify-between w-screen h-screen relative overflow-hidden`

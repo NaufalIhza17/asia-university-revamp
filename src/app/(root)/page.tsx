@@ -3,22 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  LandingBackground,
-  GalleryOne,
-  GalleryTwo,
-  GalleryThree,
-  GalleryFour,
-  GalleryFive,
-  Clouds,
-} from "~/public/images";
-import {
-  AULogo,
-  LandingBook,
-  LandingMoney,
-  LandingPeople,
-  LandingStudent,
-} from "~/public/icons";
+import LandingBackground from "~/public/images/bg-landing.png";
+import GalleryOne from "~/public/images/landing-gallery-1.png";
+import GalleryTwo from "~/public/images/landing-gallery-2.png";
+import GalleryThree from "~/public/images/landing-gallery-3.png";
+import GalleryFour from "~/public/images/landing-gallery-4.png";
+import GalleryFive from "~/public/images/landing-gallery-5.png";
+import Clouds from "~/public/images/clouds-landing.png";
+import AULogo from "~/public/icons/au-logo.svg"
+import LandingBook from "~/public/icons/landing_book.svg"
+import LandingMoney from "~/public/icons/landing_money.svg"
+import LandingPeople from "~/public/icons/landing_people.svg"
+import LandingStudent from "~/public/icons/landing_student.svg"
 import { motion } from "framer-motion";
 
 export default function Home() {

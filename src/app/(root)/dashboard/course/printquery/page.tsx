@@ -1,11 +1,10 @@
-import { CourseBannerMain } from "~/public/images";
-import { ResetIcon } from "~/public/images";
-import { QueryIcon } from "~/public/images";
+import CourseBannerMain from "~/public/images/course-banner.svg"
+import ResetIcon from "~/public/images/reset-icon.svg";
+
 
 export default function Course() {
-  // Define variables for rowspan and colspan
-  const rowspanHeader = 2; // Number of rows to span for the header cells
-  const colspanTimeTables = 5; // Number of columns to span for the "Time Tables" cell
+  const rowspanHeader = 2;
+  const colspanTimeTables = 5;
 
   return (
     <section>
@@ -133,7 +132,6 @@ export default function Course() {
             <td className="text-left pl-4 pr-4 py-2 border border-gray-300 text-[#123E44] bg-white">Sample Data 10</td>
             <td className="text-left pl-4 pr-4 py-2 border border-gray-300 text-[#123E44] bg-white">Sample Data 11</td>
           </tr>
-          {/* Repeat <tr>...</tr> for additional rows */}
         </tbody>
       </table>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, ChangeEvent } from "react";
-import { TranscriptBannerMain } from "~/public/images/";
+import TranscriptBannerMain from "~/public/images/transcript-banner-main.svg"
 
 export default function Transcript() {
   const [showhide, setShowhide]=useState('');
@@ -21,7 +21,7 @@ export default function Transcript() {
           width="363.79"
           height="362.03"
           className="absolute right-0 top-0"
-        ></TranscriptBannerMain>
+        />
       </div>
       <table className="table-auto w-full hover:border-spacing-4 mt-9 text-green-800">
         <tbody>

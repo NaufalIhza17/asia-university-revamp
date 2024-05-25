@@ -1,12 +1,19 @@
-import { PaymentBannerMain } from "~/public/images";
-import { PrintIcon } from "~/public/images";
+import PaymentBannerMain from "~/public/images/payment-banner-main.svg";
+import PrintIcon from "~/public/images/print-icon.svg";
+import getDateValue from "@/hooks/getDateValue";
 
 export default function Payment() {
+  const month = getDateValue({ options: "month" });
+  const date = getDateValue({ options: "date" });
+  const year = getDateValue({ options: "year" });
+
   return (
     <section>
-      <div className="w-full rounded-3xl bg-gradient-to-r from-[#2D937C] to-[#5ABCA6] text-white px-16 py-14 relative overflow-hidden">
-        <div className="flex flex-col font-satoshi relative z-50">
-          <p className="pb-8">March, 03 2024</p>
+      <div className="w-full rounded-3xl bg-gradient-to-r from-[#2D937C] to-[#5ABCA6] text-white px-8 md:px-16 py-7 md:py-14 relative overflow-hidden">
+        <div className="flex flex-col font-satoshi relative z-10">
+          <p className="pb-8">
+            {month}, {date} {year}
+          </p>
           <p className="text-5xl font-bold">Payment Information</p>
           <p className="pt-3">Always stay updated in your student portal</p>
         </div>
@@ -20,15 +27,34 @@ export default function Payment() {
         <table className="table-auto border border-gray-300 rounded-lg">
           <tbody>
             <tr>
-              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] bg-white w-48" style={{ width: '200px' }}>Name</td>
-              <td className="text-left pl-8 py-2 border border-gray-300 text-[#123E44] bg-white">Lorem Ipsum</td>
+              <td
+                className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] bg-white w-48"
+                style={{ width: "200px" }}
+              >
+                Name
+              </td>
+              <td className="text-left pl-8 py-2 border border-gray-300 text-[#123E44] bg-white">
+                Lorem Ipsum
+              </td>
             </tr>
             <tr className="bg-[#F0F0F0]">
-              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] w-48" style={{ width: '200px' }}>Student ID</td>
-              <td className="text-left pl-8 py-2 border border-gray-300 text-[#123E44]">Lorem Ipsum</td>
+              <td
+                className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] w-48"
+                style={{ width: "200px" }}
+              >
+                Student ID
+              </td>
+              <td className="text-left pl-8 py-2 border border-gray-300 text-[#123E44]">
+                Lorem Ipsum
+              </td>
             </tr>
             <tr>
-              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] bg-white w-48" style={{ width: '200px' }}>Academic Year</td>
+              <td
+                className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] bg-white w-48"
+                style={{ width: "200px" }}
+              >
+                Academic Year
+              </td>
               <td className="text-left pl-8 py-2 border border-gray-300 text-[#123E44] bg-white">
                 <select className="border border-gray-300 rounded-md px-2 py-1 bg-white">
                   <option value="I">I</option>
@@ -43,7 +69,12 @@ export default function Payment() {
               </td>
             </tr>
             <tr className="bg-[#F0F0F0]">
-              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] w-48" style={{ width: '200px' }}>Payment Method</td>
+              <td
+                className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] w-48"
+                style={{ width: "200px" }}
+              >
+                Payment Method
+              </td>
               <td className="text-left pl-8 py-2 border border-gray-300 text-[#123E44]">
                 <select className="border border-gray-300 rounded-md px-2 py-1 bg-white">
                   <option value="Credit Card">Credit Card</option>
@@ -61,8 +92,16 @@ export default function Payment() {
         </div>
         <div className="mt-4">
           <p className="text-[#123E44]">NB :</p>
-          <p className="text-[#123E44]">1. Make sure that the correct year period-two tards in front of the school, the first three yards represent the following : 1 st Semester, 2 nd Semester, Summer Course 1 st Semester, Summer Course 2nd Semester, Winter Course Semester.</p>
-          <p className="text-[#123E44]">2. Report to PDF format, if you can not print, please instal PDF Reader</p>
+          <p className="text-[#123E44]">
+            1. Make sure that the correct year period-two tards in front of the
+            school, the first three yards represent the following : 1 st
+            Semester, 2 nd Semester, Summer Course 1 st Semester, Summer Course
+            2nd Semester, Winter Course Semester.
+          </p>
+          <p className="text-[#123E44]">
+            2. Report to PDF format, if you can not print, please instal PDF
+            Reader
+          </p>
         </div>
       </div>
     </section>

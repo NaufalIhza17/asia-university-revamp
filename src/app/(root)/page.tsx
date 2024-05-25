@@ -3,22 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  LandingBackground,
-  GalleryOne,
-  GalleryTwo,
-  GalleryThree,
-  GalleryFour,
-  GalleryFive,
-  Clouds,
-} from "~/public/images";
-import {
-  AULogo,
-  LandingBook,
-  LandingStar,
-  LandingPeople,
-  LandingStudent,
-} from "~/public/icons";
+import LandingBackground from "~/public/images/bg-landing.png";
+import GalleryOne from "~/public/images/landing-gallery-1.png";
+import GalleryTwo from "~/public/images/landing-gallery-2.png";
+import GalleryThree from "~/public/images/landing-gallery-3.png";
+import GalleryFour from "~/public/images/landing-gallery-4.png";
+import GalleryFive from "~/public/images/landing-gallery-5.png";
+import Clouds from "~/public/images/clouds-landing.png";
+import AULogo from "~/public/icons/au-logo.svg"
+import LandingBook from "~/public/icons/landing_book.svg"
+import LandingStar from "~/public/icons/landing_star.svg"
+import LandingPeople from "~/public/icons/landing_people.svg"
+import LandingStudent from "~/public/icons/landing_student.svg"
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -198,7 +194,7 @@ export default function Home() {
                   <span className="text-[#CAFF86]">&#47;&#47;</span> Scenic Campus
                 </p>
                 <p>
-                  Asia University's campus is adorned with scenic buildings that blend modern design with classical Roman-Greek elements.
+                  Asia University&apos;s campus is adorned with scenic buildings that blend modern design with classical Roman-Greek elements.
                 </p>
               </div>
             </motion.div>

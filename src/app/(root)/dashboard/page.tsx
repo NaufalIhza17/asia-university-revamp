@@ -1,36 +1,36 @@
-"use client";
+"use client"
 
+import Link from "next/link";
 import getDateValue from "@/hooks/getDateValue";
-import { useState } from "react";
-import { DashboardBannerMain } from "~/public/images";
-import { PortofolioData, GreenPortofolioData } from "~/public/images";
-import { LibraryProfile, GreenLibraryProfile } from "~/public/images";
-import { SchoolLicensing, GreenSchoolLicensing } from "~/public/images";
-import { Office365, GreenOffice365 } from "~/public/images";
-import { LearningActivities, GreenLearningActivities } from "~/public/images";
-import { AuEats, GreenAuEats } from "~/public/images";
-
+import DashboardBannerMain from "~/public/images/dashboard-banner-main.svg"
+import ELearning from "~/public/icons/elearning.svg";
+import Library from "~/public/icons/library.svg";
+import Gear from "~/public/icons/gear.svg";
+import Office from "~/public/icons/office.svg";
+import Folder from "~/public/icons/folder.svg";
+import Eats from "~/public/icons/eats.svg";
+import { useUser } from "@/hooks/userContext";
+import { useEffect } from "react";
 
 export default function DashboardHome() {
+  const { user } = useUser();
   const month = getDateValue({ options: "month" });
   const date = getDateValue({ options: "date" });
   const year = getDateValue({ options: "year" });
-
-  const [isPortofolioDataSelected, setIsPortofolioDataSelected] = useState(false);
-  const [isLibraryProfileSelected, setIsLibraryProfileSelected] = useState(false);
-  const [isSchoolLicensingSelected, setIsSchoolLicensingSelected] = useState(false);
-  const [isOffice365Selected, setIsOffice365Selected] = useState(false);
-  const [isLearningActivitiesSelected, setIsLearningActivitiesSelected] = useState(false);
-  const [isAuEatsSelected, setIsAuEatsSelected] = useState(false);
+  useEffect(() => {
+    if (!user) {
+      console.log(user);
+    }
+  }, [user]);
 
   return (
     <section>
-      <div className="w-full rounded-3xl bg-gradient-to-r from-[#2D937C] to-[#5ABCA6] text-white px-16 py-14 relative overflow-hidden">
-        <div className="flex flex-col font-satoshi relative z-50">
+      <div className="w-full rounded-3xl bg-gradient-to-r from-[#2D937C] to-[#5ABCA6] text-white px-8 md:px-16 py-7 md:py-14 relative overflow-hidden">
+        <div className="flex flex-col font-satoshi relative z-10">
           <p className="pb-8">
             {month}, {date} {year}
           </p>
-          <p className="text-5xl font-bold">Welcome back, User</p>
+          <p className="text-5xl font-bold">Welcome back, {user?.full_name}</p>
           <p className="pt-3">Always stay updated in your student portal</p>
         </div>
         <DashboardBannerMain
@@ -40,84 +40,84 @@ export default function DashboardHome() {
         />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 mt-8">
-        <a
-          href="dashboard/portofolio"
-          onMouseEnter={() => setIsPortofolioDataSelected(true)}
-          onMouseLeave={() => setIsPortofolioDataSelected(false)}
+        <Link
+          href={"dashboard/portfolio"}
+          className="p-3 bg-white w-full h-full flex flex-col gap-5 justify-center items-center rounded-xl shadow-md group hover:bg-[#36967E] transition-all"
         >
-          <div className="bg-white h-48 w-48 flex justify-center items-center rounded-3xl shadow-md hover:animate-pulse animate-none transition-transform duration-300">
-            {isPortofolioDataSelected ? (
-              <GreenPortofolioData className="h-full w-full rounded-3xl" />
-            ) : (
-              <PortofolioData className="h-full w-full rounded-3xl" />
-            )}
-          </div>
-        </a>
-        <a
+          <ELearning
+            width={80}
+            height={80}
+            className=" fill-[#36967E] group-hover:fill-white"
+          />
+          <p className="font-medium text-xl text-[#36967E] group-hover:text-white text-center">
+            Portfolio Data
+          </p>
+        </Link>
+        <Link
           href="https://aulib.asia.edu.tw/webpac/shelf_user.cfm"
-          onMouseEnter={() => setIsLibraryProfileSelected(true)}
-          onMouseLeave={() => setIsLibraryProfileSelected(false)}
+          className="p-3 bg-white w-full h-full flex flex-col gap-5 justify-center items-center rounded-xl shadow-md group hover:bg-[#36967E] transition-all"
         >
-          <div className="bg-white h-48 w-48 flex justify-center items-center rounded-3xl shadow-md hover:animate-pulse animate-none transition-transform duration-300">
-            {isLibraryProfileSelected ? (
-              <GreenLibraryProfile className="h-full w-full rounded-3xl" />
-            ) : (
-              <LibraryProfile className="h-full w-full rounded-3xl" />
-            )}
-          </div>
-        </a>
-        <a
+          <Library
+            width={80}
+            height={80}
+            className="fill-[#36967E] group-hover:fill-white"
+          />
+          <p className="font-medium text-xl text-[#36967E] group-hover:text-white text-center">
+            Library Profile
+          </p>
+        </Link>
+        <Link
           href="https://ic.asia.edu.tw/zh_tw/software/campus_agreement_software/software_list"
-          onMouseEnter={() => setIsSchoolLicensingSelected(true)}
-          onMouseLeave={() => setIsSchoolLicensingSelected(false)}
+          className="p-3 bg-white w-full h-full flex flex-col gap-5 justify-center items-center rounded-xl shadow-md group hover:bg-[#36967E] transition-all"
         >
-          <div className="bg-white h-48 w-48 flex justify-center items-center rounded-3xl shadow-md hover:animate-pulse animate-none transition-transform duration-300">
-            {isSchoolLicensingSelected ? (
-              <GreenSchoolLicensing className="h-full w-full rounded-3xl" />
-            ) : (
-              <SchoolLicensing className="h-full w-full rounded-3xl" />
-            )}
-          </div>
-        </a>
-        <a
+          <Gear
+            width={80}
+            height={80}
+            className="fill-[#36967E] group-hover:fill-white"
+          />
+          <p className="font-medium text-xl text-[#36967E] group-hover:text-white text-center">
+            School Licensing Service
+          </p>
+        </Link>
+        <Link
           href="https://outlook.office.com/mail/"
-          onMouseEnter={() => setIsOffice365Selected(true)}
-          onMouseLeave={() => setIsOffice365Selected(false)}
+          className="p-3 bg-white w-full h-full flex flex-col gap-5 justify-center items-center rounded-xl shadow-md group hover:bg-[#36967E] transition-all"
         >
-          <div className="bg-white h-48 w-48 flex justify-center items-center rounded-3xl shadow-md hover:animate-pulse animate-none transition-transform duration-300">
-            {isOffice365Selected ? (
-              <GreenOffice365 className="h-full w-full rounded-3xl" />
-            ) : (
-              <Office365 className="h-full w-full rounded-3xl" />
-            )}
-          </div>
-        </a>
-        <a
+          <Office
+            width={80}
+            height={80}
+            className="fill-[#36967E] group-hover:fill-white"
+          />
+          <p className="font-medium text-xl text-[#36967E] group-hover:text-white text-center">
+            Office 365 Webmail
+          </p>
+        </Link>
+        <Link
           href="https://webap.asia.edu.tw/cfd2020/#/X01/X01FALL"
-          onMouseEnter={() => setIsLearningActivitiesSelected(true)}
-          onMouseLeave={() => setIsLearningActivitiesSelected(false)}
+          className="p-3 bg-white w-full h-full flex flex-col gap-5 justify-center items-center rounded-xl shadow-md group hover:bg-[#36967E] transition-all"
         >
-          <div className="bg-white h-48 w-48 flex justify-center items-center rounded-3xl shadow-md hover:animate-pulse animate-none transition-transform duration-300">
-            {isLearningActivitiesSelected ? (
-              <GreenLearningActivities className="h-full w-full rounded-3xl" />
-            ) : (
-              <LearningActivities className="h-full w-full rounded-3xl" />
-            )}
-          </div>
-        </a>
-        <a
+          <Folder
+            width={80}
+            height={80}
+            className="fill-[#36967E] group-hover:fill-white"
+          />
+          <p className="font-medium text-xl text-[#36967E] group-hover:text-white text-center">
+            Learning Activities Registration System
+          </p>
+        </Link>
+        <Link
           href="https://line.me/R/ti/p/%40343hambs"
-          onMouseEnter={() => setIsAuEatsSelected(true)}
-          onMouseLeave={() => setIsAuEatsSelected(false)}
+          className="p-3 bg-white w-full h-full flex flex-col gap-5 justify-center items-center rounded-xl shadow-md group hover:bg-[#36967E] transition-all"
         >
-          <div className="bg-white h-48 w-48 flex justify-center items-center rounded-3xl shadow-md hover:animate-pulse animate-none transition-transform duration-300">
-            {isAuEatsSelected ? (
-              <GreenAuEats className="h-full w-full rounded-3xl" />
-            ) : (
-              <AuEats className="h-full w-full rounded-3xl" />
-            )}
-          </div>
-        </a>
+          <Eats
+            width={80}
+            height={80}
+            className="fill-[#36967E] group-hover:fill-white"
+          />
+          <p className="font-medium text-xl text-[#36967E] group-hover:text-white text-center">
+            AU Eats
+          </p>
+        </Link>
       </div>
     </section>
   );

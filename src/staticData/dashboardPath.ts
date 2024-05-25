@@ -15,8 +15,4 @@ export const dashboardPath = [
     slug: "/dashboard/transcript",
     name: "Transcript"
   },
-  {
-    slug: "/dashboard/news",
-    name: "AU News"
-  },
 ];

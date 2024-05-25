@@ -42,7 +42,7 @@ export default function Layout({
     if (user?.is_admin) {
       router.push("/admin/dashboard");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, router, user?.is_admin]);
 
   return (
     <main className="relative">

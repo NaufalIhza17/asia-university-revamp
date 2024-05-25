@@ -25,13 +25,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     !!Cookies.get("ACCESS_TOKEN")
   );
   const router = useRouter();
-  
+
   useEffect(() => {
     if (!user) {
       console.log(user);
     }
   }, [user]);
-  
+
   useEffect(() => {
     if (!isLoggedIn) {
       Cookies.remove("ACCESS_TOKEN");
@@ -42,7 +42,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     if (!user?.is_admin) {
       router.push("/dashboard");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, router, user?.is_admin]);
 
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {

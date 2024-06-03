@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState, SyntheticEvent } from "react";
 import Cookies from "js-cookie";
 import { loginRequest } from "@/services/auth";
-import LoginSignUpBG from "~/public/images/login-signup-bg.jpg";
+import LoginBG from "~/public/images/login-bg.jpg";
 import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
 import "react-toastify/dist/ReactToastify.css";
@@ -45,7 +45,6 @@ export default function SignUp() {
       setIsLoading(true);
       e.preventDefault();
       const res = await loginRequest(formData);
-      console.log(res.data);
       if (res?.data?.token) {
         Cookies.set("ACCESS_TOKEN", res.data.token);
         Cookies.set("REFRESH_TOKEN", res.data.refresh_token);
@@ -241,7 +240,7 @@ export default function SignUp() {
           )}
         >
           <Image
-            src={LoginSignUpBG}
+            src={LoginBG}
             alt=""
             className="w-full h-full"
             priority

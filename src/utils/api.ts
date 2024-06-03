@@ -12,6 +12,7 @@ interface apiRequestProp {
   path: string;
   timeout?: number;
   auth: boolean;
+  noBearer?: boolean;
 }
 
 export const apiRequest = async (props: apiRequestProp) => {
@@ -24,6 +25,7 @@ export const apiRequest = async (props: apiRequestProp) => {
     params,
     path,
     auth = true,
+    noBearer = false,
   } = props;
 
   const baseUrl = url ? `${url}/` : `${BASE_URL}/`;
@@ -39,7 +41,7 @@ export const apiRequest = async (props: apiRequestProp) => {
     url: baseUrl + path,
     headers: {
       // 'Content-Type' : 'application/json',
-      Authorization: token && auth ? `Bearer ${token}` : "",
+      Authorization: token && auth ? !noBearer ? `Bearer ${token}` : `${token}` : "",
     },
   };
 

@@ -2,7 +2,7 @@
 
 import { SyntheticEvent, useEffect, useState } from "react";
 import Image from "next/image";
-import LoginSignUpBG from "~/public/images/login-signup-bg.jpg";
+import SignUpBG from "~/public/images/signup-bg.jpg";
 import useWindowHeight from "@/hooks/useWindowHeight";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { cn } from "@/hooks/cn";
@@ -41,8 +41,8 @@ export default function SignUp() {
       setIsLoading(true);
       e.preventDefault();
       const res = await signupRequest(formData);
-      console.log(isLoading)
-      console.log(res)
+      console.log(res?.data)
+      console.log(res?.data?.InsertedID)
       if (res?.data?.InsertedID) {
         toast.success("Account successfully created");
         const redirectTimer = setTimeout(() => {
@@ -239,7 +239,7 @@ export default function SignUp() {
           )}
         >
           <Image
-            src={LoginSignUpBG}
+            src={SignUpBG}
             alt=""
             className="w-full h-full"
             priority

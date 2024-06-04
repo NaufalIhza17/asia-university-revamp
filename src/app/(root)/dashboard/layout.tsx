@@ -44,9 +44,15 @@ export default function Layout({
     }
   }, [isLoggedIn, router, user?.is_admin]);
 
+  const onClickLogout = () => {
+    Cookies.remove("ACCESS_TOKEN");
+    Cookies.remove("REFRESH_TOKEN");
+    setIsLoggedIn(false);
+  };
+
   return (
     <main className="relative">
-      <Navbar isSearch />
+      <Navbar isSearch onClickLogout={() => onClickLogout} />
       <section className="grid grid-cols-20 py-12 layout min-h-[calc(100vh-204px)] md:min-h-[calc(100vh-223px)]">
         <div className="col-start-2  col-end-[20] flex gap-12 h-fit">
           <div className="min-w-[220px] max-w-[320px] bg-gradient-to-b from-[#36967E] to-[#4AA39F] rounded-3xl lg:flex flex-col justify-center items-center py-11 font-satoshi hidden h-fit">
@@ -80,11 +86,7 @@ export default function Layout({
                   className={cn(
                     "flex gap-3 text-white/50 fill-white/50 hover:text-white hover:fill-white transition-all delay-75 hover:bg-white/10 p-5 cursor-pointer"
                   )}
-                  onClick={() => {
-                    Cookies.remove("ACCESS_TOKEN");
-                    Cookies.remove("REFRESH_TOKEN");
-                    setIsLoggedIn(false);
-                  }}
+                  onClick={onClickLogout}
                 >
                   <LogoutIcon className="w-[26px] h-[26px]" />
                   <p className="select-none">Logout</p>

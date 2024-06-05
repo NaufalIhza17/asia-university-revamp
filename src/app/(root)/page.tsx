@@ -10,14 +10,56 @@ import GalleryThree from "~/public/images/landing-gallery-3.png";
 import GalleryFour from "~/public/images/landing-gallery-4.png";
 import GalleryFive from "~/public/images/landing-gallery-5.png";
 import Clouds from "~/public/images/clouds-landing.png";
-import AULogo from "~/public/icons/au-logo.svg"
-import LandingBook from "~/public/icons/landing_book.svg"
-import LandingStar from "~/public/icons/landing_star.svg"
-import LandingPeople from "~/public/icons/landing_people.svg"
-import LandingStudent from "~/public/icons/landing_student.svg"
-import { motion } from "framer-motion";
+import AULogo from "~/public/icons/au-logo.svg";
+import LandingBook from "~/public/icons/landing_book.svg";
+import LandingStar from "~/public/icons/landing_star.svg";
+import LandingPeople from "~/public/icons/landing_people.svg";
+import LandingStudent from "~/public/icons/landing_student.svg";
+import { motion, useMotionValue } from "framer-motion";
+import { useState, useEffect } from "react";
+
+const DRAG_BUFFER = 50;
+const CARD_WIDTH = 420;
+const CARD_GAP = 20;
+const VIEWPORT_CENTER = window.innerWidth / 2 - CARD_WIDTH / 2;
 
 export default function Home() {
+  const [cardIndex, setCardIndex] = useState(1);
+  const [dragging, setDragging] = useState(false);
+  const dragX = useMotionValue(0);
+
+  const onDragStart = () => {
+    setDragging(true);
+  };
+
+  const onDragEnd = () => {
+    setDragging(false);
+
+    const x = dragX.get();
+
+    if (x <= -DRAG_BUFFER) {
+      setCardIndex((pv) => (pv + 1) % (newsStatic.length + 2));
+    } else if (x >= DRAG_BUFFER) {
+      setCardIndex(
+        (pv) => (pv - 1 + (newsStatic.length + 2)) % (newsStatic.length + 2)
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (cardIndex === 0) {
+      setCardIndex(newsStatic.length);
+    } else if (cardIndex === newsStatic.length + 1) {
+      setCardIndex(1);
+    }
+  }, [cardIndex]);
+
+  const displayedCards = [
+    newsStatic[newsStatic.length - 1],
+    ...newsStatic,
+    newsStatic[0],
+  ];
+
   return (
     <main className="flex flex-col items-center justify-center h-fit relative overflow-hidden">
       <section className="bg-gradient-to-b from-[#6490D1] via-[#A7CAFF] to-white h-[732px] md:h-[915px] relative w-full">
@@ -83,9 +125,7 @@ export default function Home() {
                 className="max-lg:w-[40px]"
               />
             </div>
-            <p className="lg:text-xl">
-              Globally ranked among top universities
-            </p>
+            <p className="lg:text-xl">Globally ranked among top universities</p>
           </motion.div>
           <motion.div
             variants={fadeInAnimationVariationsBottom}
@@ -96,11 +136,7 @@ export default function Home() {
             className="grid items-center justify-center gap-[5px] lg:gap-[10px] bg-[#2F4B2C] px-[27.5px] lg:px-[55px] py-[58px] lg:py-[116px]"
           >
             <div className="w-full flex justify-center">
-              <LandingStar
-                width={64}
-                height={64}
-                className="max-lg:w-[40px]"
-              />
+              <LandingStar width={64} height={64} className="max-lg:w-[40px]" />
             </div>
             <p className="lg:text-xl">
               Top-5 university in Taiwan for three years
@@ -191,10 +227,12 @@ export default function Home() {
               />
               <div className="opacity-0 absolute z-10 top-0 left-0 w-full h-full bg-[#82684B]/50 text-white group-hover:opacity-100 transition-opacity delay-200 flex flex-col gap-4 xl:gap-6 py-8 xl:py-16 px-4 xl:px-8">
                 <p className="text-xl">
-                  <span className="text-[#CAFF86]">&#47;&#47;</span> Scenic Campus
+                  <span className="text-[#CAFF86]">&#47;&#47;</span> Scenic
+                  Campus
                 </p>
                 <p>
-                  Asia University&apos;s campus is adorned with scenic buildings that blend modern design with classical Roman-Greek elements.
+                  Asia University&apos;s campus is adorned with scenic buildings
+                  that blend modern design with classical Roman-Greek elements.
                 </p>
               </div>
             </motion.div>
@@ -215,10 +253,12 @@ export default function Home() {
               />
               <div className="opacity-0 absolute z-10 top-0 left-0 w-full h-full bg-[#82684B]/50 text-white group-hover:opacity-100 transition-opacity delay-200 flex flex-col gap-4 xl:gap-6 py-8 xl:py-16 px-4 xl:px-8">
                 <p className="text-xl">
-                  <span className="text-[#CAFF86]">&#47;&#47;</span> Faculty Building
+                  <span className="text-[#CAFF86]">&#47;&#47;</span> Faculty
+                  Building
                 </p>
                 <p>
-                  The faculty buildings are architecturally impressive, providing state-of-the-art facilities for academic excellence.
+                  The faculty buildings are architecturally impressive,
+                  providing state-of-the-art facilities for academic excellence.
                 </p>
               </div>
             </motion.div>
@@ -242,7 +282,8 @@ export default function Home() {
                   <span className="text-[#CAFF86]">&#47;&#47;</span> Campus View
                 </p>
                 <p>
-                  The campus view is breathtaking, with picturesque landscapes and serene gardens.
+                  The campus view is breathtaking, with picturesque landscapes
+                  and serene gardens.
                 </p>
               </div>
             </motion.div>
@@ -268,7 +309,8 @@ export default function Home() {
                   <span className="text-[#CAFF86]">&#47;&#47;</span> Dormitory
                 </p>
                 <p>
-                  The dormitories offer a comfortable and well-equipped living environment for students.
+                  The dormitories offer a comfortable and well-equipped living
+                  environment for students.
                 </p>
               </div>
             </motion.div>
@@ -292,7 +334,8 @@ export default function Home() {
                   <span className="text-[#CAFF86]">&#47;&#47;</span> Ando Museum
                 </p>
                 <p>
-                  The Ando Museum, designed by Tadao Ando, is a cultural gem on campus, hosting regular art exhibitions.
+                  The Ando Museum, designed by Tadao Ando, is a cultural gem on
+                  campus, hosting regular art exhibitions.
                 </p>
               </div>
             </motion.div>
@@ -315,10 +358,12 @@ export default function Home() {
             about us
           </h1>
           <p className="max-w-[583px] font-medium text-xl lg:text-2xl text-white">
-            Asia University is celebrated for its rapid rise in global university rankings, earning praise for its academic 
-            excellence, distinguished faculty, and innovative achievements. Our commitment to internationalization and 
-            collaboration, coupled with an award-winning, aesthetically pleasing campus, has garnered admiration from educators, 
-            students, and academic leaders worldwide.
+            Asia University is celebrated for its rapid rise in global
+            university rankings, earning praise for its academic excellence,
+            distinguished faculty, and innovative achievements. Our commitment
+            to internationalization and collaboration, coupled with an
+            award-winning, aesthetically pleasing campus, has garnered
+            admiration from educators, students, and academic leaders worldwide.
           </p>
           <motion.div
             variants={fadeInAnimationVariationsScale}
@@ -336,7 +381,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="w-full max-w-[1103px] px-5 flex justify-center mb-[75px] md:mb-[150px]">
+      <section className="w-full px-5 flex justify-center mb-[75px] md:mb-[150px]">
         <div className="w-full flex flex-col gap-10 lg:gap-15">
           <motion.h2
             variants={fadeInAnimationVariationsLeft}
@@ -344,12 +389,26 @@ export default function Home() {
             whileInView="animate"
             viewport={{ once: true }}
             custom={2}
-            className="text-2xl md:text-4xl w-full max-md:text-center"
+            className="text-2xl md:text-4xl w-full max-md:text-center max-w-[1103px] mx-auto"
           >
             CURRENT <span className="font-black">NEWS</span>
           </motion.h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-9 text-white">
-            {newsStatic.map((news, index) => (
+          <motion.div
+            drag="x"
+            dragConstraints={{
+              left: 0,
+              right: 0,
+            }}
+            style={{ x: dragX }}
+            animate={{
+              translateX:
+                -cardIndex * (CARD_WIDTH + CARD_GAP) + VIEWPORT_CENTER,
+            }}
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
+            className="flex items-center gap-5 text-white"
+          >
+            {displayedCards.map((news, index) => (
               <motion.div
                 key={index}
                 variants={fadeInAnimationVariationsRight}
@@ -357,26 +416,29 @@ export default function Home() {
                 whileInView="animate"
                 viewport={{ once: true }}
                 custom={3 * index}
-                className="col-span-1"
+                className="col-span-1 rounded-xl overflow-hidden shadow-2 min-w-100"
               >
-                <div className="bg-[#4C704B]/80 grid gap-4 p-6">
+                <div className="text-black grid gap-4 p-6">
+                  <p className="text-sm italic">05 June 2024</p>
                   <p className="text-2xl md:text-3xl font-black">
                     {news.title}
                   </p>
-                  <p className="text-lg md:text-xl">{news.desc}</p>
+                  <p className="text-lg leading-tight text-justify">
+                    {news.desc}
+                  </p>
                 </div>
                 <Link href={news.url}>
-                  <div className="bg-black-2 text-sm font-light">
+                  <div className="bg-black-2 hover:bg-black transition-all text-sm font-light">
                     <p className="w-full text-center p-2">SEE MORE</p>
                   </div>
                 </Link>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="bg-[#3D5F4E] w-full text-white flex justify-center px-10 py-20 text-center">
+      <section className="bg-black-2 w-full text-white flex justify-center px-10 py-20 text-center">
         <p>
           © 2024 Asia University Website
           <br />
@@ -389,17 +451,27 @@ export default function Home() {
 
 const newsStatic = [
   {
-    title: "Lorem Ipsum",
+    title: "Lorem Ipsum 1",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
     url: "/",
   },
   {
-    title: "Lorem Ipsum",
+    title: "Lorem Ipsum 2",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
     url: "/",
   },
   {
-    title: "Lorem Ipsum",
+    title: "Lorem Ipsum 3",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
+    url: "/",
+  },
+  {
+    title: "Lorem Ipsum 4",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
+    url: "/",
+  },
+  {
+    title: "Lorem Ipsum 5",
     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
     url: "/",
   },

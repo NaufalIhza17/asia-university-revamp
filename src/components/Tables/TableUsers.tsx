@@ -4,6 +4,7 @@ interface UserData {
   full_name: string;
   email: string;
   _id: string;
+  user_id: string;
 }
 
 const TableUsers = ({
@@ -13,9 +14,6 @@ const TableUsers = ({
   studentData: UserData[];
   onClickDelUser: (newsid: string) => Promise<void>;
 }) => {
-  // Active | Drop Out | Temporary Leave
-  const status = "Active";
-
   const router = useRouter();
 
   return (
@@ -26,6 +24,9 @@ const TableUsers = ({
             <tr className="text-left text-white bg-black">
               <th className="min-w-[150px] px-4 py-4 font-medium xl:pl-11">
                 Student Name
+              </th>
+              <th className="min-w-[150px] px-4 py-4 font-medium">
+                Student ID
               </th>
               <th className="min-w-[150px] px-4 py-4 font-medium">
                 Student Email
@@ -43,19 +44,20 @@ const TableUsers = ({
                   <h5 className="font-medium text-black">{data.full_name}</h5>
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5">
+                  <p className="text-black">{data.user_id}</p>
+                </td>
+                <td className="border-b border-[#eee] px-4 py-5">
                   <p className="text-black">{data.email}</p>
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5">
                   <p
                     className={`inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium ${
-                      status === "Active"
+                      data.user_id
                         ? "bg-success text-success"
-                        : status === "Drop Out"
-                        ? "bg-danger text-danger"
-                        : "bg-warning text-warning"
+                        : "bg-danger text-danger"
                     }`}
                   >
-                    {status}
+                    {data.user_id ? "Active" : "Not Active"}
                   </p>
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5">

@@ -41,8 +41,6 @@ export default function SignUp() {
       setIsLoading(true);
       e.preventDefault();
       const res = await signupRequest(formData);
-      console.log(res?.data)
-      console.log(res?.data?.InsertedID)
       if (res?.data?.InsertedID) {
         toast.success("Account successfully created");
         const redirectTimer = setTimeout(() => {

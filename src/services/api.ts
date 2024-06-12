@@ -9,25 +9,26 @@ export const getUsers = async (params: { page: string; limitTo: string }) => {
   });
 };
 
-export const getUser = async (params: { user_id: string }) => {
-  const { user_id } = params;
+export const getUser = async (params: { id: string }) => {
+  const { id } = params;
   return apiRequest({
     auth: false,
-    path: `users/${user_id}`,
+    path: `users/${id}`,
     method: "GET",
   });
 };
 
 export const editUser = async (params: {
-  user_id: string;
+  id: string;
   full_name?: string;
   email?: string;
   avatar?: string;
+  user_id?: string;
 }) => {
-  const { user_id, ...bodyRequest } = params;
+  const { id, ...bodyRequest } = params;
   return apiRequest({
     auth: true,
-    path: `users/${user_id}`,
+    path: `users/${id}`,
     method: "PATCH",
     bodyRequest: bodyRequest,
   });

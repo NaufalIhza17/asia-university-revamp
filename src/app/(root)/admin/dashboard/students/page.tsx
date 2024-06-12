@@ -13,6 +13,7 @@ interface UserData {
   email: string;
   _id: string;
   is_admin: boolean;
+  user_id: string;
 }
 
 export default function Students() {

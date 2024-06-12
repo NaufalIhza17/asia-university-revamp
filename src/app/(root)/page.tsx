@@ -24,7 +24,7 @@ const CARD_GAP = 20;
 const VIEWPORT_CENTER = window.innerWidth / 2 - CARD_WIDTH / 2;
 
 export default function Home() {
-  const [cardIndex, setCardIndex] = useState(1);
+  const [cardIndex, setCardIndex] = useState(3);
   const [dragging, setDragging] = useState(false);
   const dragX = useMotionValue(0);
 
@@ -116,7 +116,7 @@ export default function Home() {
             whileInView="animate"
             viewport={{ once: true }}
             custom={1}
-            className="grid items-center justify-center gap-[5px] lg:gap-[10px] bg-[#2D5433] px-[27.5px] lg:px-[55px] py-[58px] lg:py-[116px]"
+            className="grid items-center justify-center gap-[5px] lg:gap-[10px] bg-gradient-to-r from-[#3D5F4E] to-[#2F4B2C] px-[27.5px] lg:px-[55px] py-[58px] lg:py-[116px]"
           >
             <div className="w-full flex justify-center">
               <LandingStudent
@@ -148,7 +148,7 @@ export default function Home() {
             whileInView="animate"
             viewport={{ once: true }}
             custom={3}
-            className="grid items-center justify-center gap-[5px] lg:gap-[10px] bg-[#3D5F4E] px-[27.5px] lg:px-[55px] py-[58px] lg:py-[116px]"
+            className="grid items-center justify-center gap-[5px] lg:gap-[10px] bg-[#2F4B2C] px-[27.5px] lg:px-[55px] py-[58px] lg:py-[116px]"
           >
             <div className="w-full flex justify-center">
               <LandingBook width={64} height={64} className="max-lg:w-[40px]" />
@@ -163,7 +163,7 @@ export default function Home() {
             whileInView="animate"
             viewport={{ once: true }}
             custom={4}
-            className="grid items-center justify-center gap-[5px] lg:gap-[10px] bg-[#4C704B] px-[27.5px] lg:px-[55px] py-[58px] lg:py-[116px]"
+            className="grid items-center justify-center gap-[5px] lg:gap-[10px] bg-gradient-to-l from-[#3D5F4E] to-[#2F4B2C] px-[27.5px] lg:px-[55px] py-[58px] lg:py-[116px]"
           >
             <div className="w-full flex justify-center">
               <LandingPeople
@@ -343,7 +343,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#3D5F4E] h-80 md:h-100 w-full mb-[75px] md:mb-[150px] overflow-visible flex items-center justify-center">
+      {/*<section className="bg-[#3D5F4E] h-80 md:h-100 w-full mb-[75px] md:mb-[150px] overflow-visible flex items-center justify-center">
         <motion.div
           variants={fadeInAnimationVariationsLeft}
           initial="initial"
@@ -379,7 +379,7 @@ export default function Home() {
             <div className="w-[10px] h-[27px] bg-[#CAFF86] rounded-full"></div>
           </div>
         </motion.div>
-      </section>
+  </section>*/}
 
       <section className="w-full px-5 flex justify-center mb-[75px] md:mb-[150px]">
         <div className="w-full flex flex-col gap-10 lg:gap-15">
@@ -389,7 +389,7 @@ export default function Home() {
             whileInView="animate"
             viewport={{ once: true }}
             custom={2}
-            className="text-2xl md:text-4xl w-full max-md:text-center max-w-[1103px] mx-auto"
+            className="text-2xl md:text-4xl w-full text-center max-w-[1103px] mx-auto"
           >
             CURRENT <span className="font-black">NEWS</span>
           </motion.h2>

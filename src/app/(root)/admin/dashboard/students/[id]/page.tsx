@@ -6,17 +6,21 @@ import { getUser, editUser } from "@/services/api";
 import { usePathname } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { cn } from "@/hooks/cn";
 
 interface UserData {
   full_name: string;
   email: string;
   _id: string;
+  user_id: string;
 }
 
 export default function Student() {
   const [userData, setUserData] = useState<UserData>();
   const [fullName, setFullName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [sid, setSid] = useState<string>("");
+
   const pathname = usePathname();
   const lastPathName = pathname.split("/");
 
@@ -26,9 +30,8 @@ export default function Student() {
 
   const fetchUsers = async () => {
     try {
-      console.log(lastPathName[lastPathName.length - 1]);
       const response = await getUser({
-        user_id: lastPathName[lastPathName.length - 1],
+        id: lastPathName[lastPathName.length - 1],
       });
       setUserData(response.data);
     } catch (error) {
@@ -42,10 +45,11 @@ export default function Student() {
     const updatedUserData = {
       full_name: fullName ? fullName : userData?.full_name,
       email: email ? email : userData?.email,
+      user_id: userData?.user_id,
     };
 
     try {
-      const response = await editUser({ user_id: userId, ...updatedUserData });
+      const response = await editUser({ id: userId, ...updatedUserData });
       toast.success("User updated successfully");
       console.log("User updated successfully:", response.data);
       setTimeout(() => {
@@ -59,11 +63,34 @@ export default function Student() {
     }
   };
 
+  const addStudentID = async (event: FormEvent) => {
+    event.preventDefault();
+    const userId = lastPathName[lastPathName.length - 1];
+    const addSID = {
+      full_name: userData?.full_name,
+      email: userData?.email,
+      user_id: sid ? sid : userData?.user_id,
+    };
+
+    try {
+      const response = await editUser({ id: userId, ...addSID });
+      toast.success("User verified successfully");
+      console.log("User verified successfully:", response.data);
+      setTimeout(() => {
+        fetchUsers();
+        setSid("");
+      }, 3000);
+    } catch (error) {
+      toast.error("Error updating student id, try again");
+      console.error("Error updating student id:", error);
+    }
+  };
+
   return (
     <DefaultLayout>
       <ToastContainer position="top-right" autoClose={3000} />
 
-      <div className="text-black">
+      <div className="text-black pb-5">
         <div className="grid sm:grid-cols-2 gap-5 w-full text-center">
           <div className="w-full p-3 sm:p-5 rounded shadow-3">
             <p className="text-sm italic">Current Student Name</p>
@@ -73,9 +100,25 @@ export default function Student() {
             <p className="text-sm italic">Current Student Email</p>
             <p className="text-2xl font-bold">{userData?.email}</p>
           </div>
+          <div className="w-full p-2 sm:p-5 rounded shadow-3">
+            <p className="text-sm italic">Student ID</p>
+            <p className="text-2xl font-bold">
+              {userData?.user_id ? userData?.user_id : "XXXX"}
+            </p>
+          </div>
+          <div
+            className={cn(
+              "w-full p-3 sm:p-5 rounded shadow-3",
+              userData?.user_id ? "bg-success" : "bg-danger"
+            )}
+          >
+            <p className="text-xl font-bold italic text-white flex items-center justify-center h-full">
+              {userData?.user_id ? "Verified" : "Not Verified"}
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col py-10">
+        <div className="flex flex-col py-5">
           <div className="w-full py-3 border-b">
             <h1 className="text-2xl font-bold">Edit</h1>
           </div>
@@ -167,6 +210,41 @@ export default function Student() {
               className="mt-4 p-2 bg-blue-500 text-white rounded italic hover:shadow-5 hover:bg-blue-600 transition-all"
             >
               Update
+            </button>
+          </form>
+        </div>
+
+        <div className="flex flex-col py-5">
+          <div className="w-full py-3 border-b">
+            <h1 className="text-2xl font-bold">Verify Student</h1>
+          </div>
+          <form
+            method="post"
+            className="flex flex-col py-5 gap-3"
+            onSubmit={addStudentID}
+          >
+            <div className="flex items-center gap-4">
+              <label
+                htmlFor="sid"
+                className="text-lg min-w-[150px] md:min-w-[200px]"
+              >
+                Add Student ID
+              </label>
+              <input
+                type="text"
+                id="sid"
+                value={sid}
+                onChange={(e) => setSid(e.target.value)}
+                className="bg-gray w-full p-2 rounded"
+                placeholder={userData?.user_id ? userData?.user_id : "Insert student ID..."}
+                disabled={userData?.user_id ? true : false}
+              />
+            </div>
+            <button
+              type="submit"
+              className={cn("mt-4 p-2 bg-green-500 text-white rounded italic hover:shadow-5 hover:bg-green-600 transition-all", userData?.user_id ? "hidden" : "")}
+            >
+              Verify
             </button>
           </form>
         </div>

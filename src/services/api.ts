@@ -97,3 +97,43 @@ export const deleteNews = async (params: { newsid: string }) => {
     method: "DELETE",
   });
 };
+
+export const getCourses = async () => {
+  return apiRequest({
+    auth: false,
+    path: `course`,
+    method: "GET",
+  });
+};
+
+export const getTranscript = async (params: { user_id?: string }) => {
+  const { user_id } = params;
+  return apiRequest({
+    auth: false,
+    path: `transcript/${user_id}`,
+    method: "GET",
+  });
+};
+
+export const addTranscript = async (params: {
+  user_id?: string;
+  course_id?: string;
+  taken_in?: string;
+}) => {
+  const { user_id, course_id, ...bodyRequest } = params;
+  return apiRequest({
+    auth: false,
+    path: `transcript/${user_id}/${course_id}`,
+    method: "POST",
+    bodyRequest: bodyRequest,
+  });
+};
+
+export const deleteTranscript = async (params: { transcript_id?: string }) => {
+  const { transcript_id } = params;
+  return apiRequest({
+    auth: false,
+    path: `transcript/${transcript_id}`,
+    method: "DELETE",
+  });
+};

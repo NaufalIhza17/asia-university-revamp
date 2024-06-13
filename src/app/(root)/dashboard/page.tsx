@@ -13,10 +13,12 @@ import { useUser } from "@/hooks/userContext";
 import { useEffect } from "react";
 
 export default function DashboardHome() {
-  const { user } = useUser();
   const month = getDateValue({ options: "month" });
   const date = getDateValue({ options: "date" });
   const year = getDateValue({ options: "year" });
+  
+  const { user } = useUser();
+  
   useEffect(() => {
     if (!user) {
       console.log(user);

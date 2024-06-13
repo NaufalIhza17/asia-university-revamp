@@ -53,7 +53,9 @@ export default function SignUp() {
           email: res.data.email,
           user_id: res.data.user_id,
           is_admin: res.data.is_admin,
+          _id: res.data.ID,
         });
+        console.log(res.data)
         toast.success("Login successfully");
         const redirectTimer = setTimeout(() => {
           if (res.data.is_admin) {
@@ -167,10 +169,10 @@ export default function SignUp() {
                   })
                 }
               />
-              <div className="flex gap-1">
+              {/* <div className="flex gap-1">
                 <input type="checkbox" className="w-fit" />
                 <p className="font-medium text-xs">Remember for 30 days</p>
-              </div>
+              </div> */}
               <button
                 type="submit"
                 className="p-2 w-full bg-[#36967E] rounded-xl mt-3 flex justify-center"
@@ -239,12 +241,7 @@ export default function SignUp() {
             isShortinWidth ? "-top-[40%] -right-1/4" : "-right-1/4 2xl:right-0"
           )}
         >
-          <Image
-            src={LoginBG}
-            alt=""
-            className="w-full h-full"
-            priority
-          />
+          <Image src={LoginBG} alt="" className="w-full h-full" priority />
         </div>
       </section>
     </main>

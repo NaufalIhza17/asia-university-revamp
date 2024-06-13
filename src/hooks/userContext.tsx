@@ -13,6 +13,7 @@ interface User {
   email: string;
   user_id: string;
   is_admin: boolean;
+  _id: string;
 }
 
 interface UserContextType {

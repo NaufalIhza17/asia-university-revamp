@@ -102,9 +102,9 @@ export default function Home() {
         <motion.div
           animate={{ y: [0, 25, 0] }}
           transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-          className="absolute bottom-70 left-0 min-w-[1152px] w-full"
+          className="absolute bottom-70 left-[5%] min-w-[1152px] w-full"
         >
-          <Image src={Clouds} alt="" width={1766} height={379} />
+          <Image src={Clouds} alt="" width={1766} height={379} className="flex justify-center" />
         </motion.div>
       </section>
 

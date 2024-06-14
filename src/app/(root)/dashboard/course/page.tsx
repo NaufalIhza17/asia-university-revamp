@@ -55,7 +55,7 @@ export default function Course() {
     setIsLoading(true);
     try {
       const response = await getTranscript({ user_id: user?._id });
-      console.log("initial response: ", response.data);
+      // console.log("initial response: ", response.data);
       const courseIds = response.data.map(
         (course: { course_id: string }) => course.course_id
       );
@@ -64,7 +64,7 @@ export default function Course() {
       const filteredCourses = courseResponse.data.filter(
         (course: { _id: string }) => courseIds.includes(course._id)
       );
-      console.log("filtered: ", filteredCourses);
+      // console.log("filtered: ", filteredCourses);
 
       const updatedCourseData = filteredCourses.map((course: { _id: any }) => {
         if (courseIds.includes(course._id)) {
@@ -74,13 +74,17 @@ export default function Course() {
               (transcript: { course_id: any }) =>
                 transcript.course_id === course._id
             )?.ID,
+            approval: response.data.find(
+              (transcript: { course_id: any }) =>
+                transcript.course_id === course._id
+            )?.approval,
           };
         } else {
           return course;
         }
       });
 
-      console.log("updated:  ", updatedCourseData);
+      // console.log("updated:  ", updatedCourseData);
       setCourseData(updatedCourseData);
       setIsLoading(false);
     } catch (error) {

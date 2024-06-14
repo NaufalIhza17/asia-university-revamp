@@ -9,6 +9,6 @@ export interface CourseData {
   course_code: string;
   semester: string;
   english: boolean;
-  approval: boolean;
+  approval?: boolean;
   transcript_id?: string;
 }

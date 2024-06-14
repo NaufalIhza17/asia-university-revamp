@@ -69,7 +69,6 @@ export const CustomCourseCard = ({
           <p className="text-sm text-[#737373]">
             {data.english ? "English Class" : "华语 Class"} | {data.department}
           </p>
-          <p>{data.transcript_id}</p>
         </div>
         <div className="flex gap-5">
           <div className="flex flex-col">

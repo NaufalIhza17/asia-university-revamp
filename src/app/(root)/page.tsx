@@ -451,29 +451,53 @@ export default function Home() {
 
 const newsStatic = [
   {
-    title: "Lorem Ipsum 1",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
-    url: "/",
+    title: "Asia University President Jeffrey J.P. Tsai visits Harvard University in the United States to discuss research collaboration with the International Center for Genetic Disease",
+    desc: "President Jeffrey J.P. Tsai and Chair Professor Kuan-Tsae Huang from Asia University visited the International Center for Genetic Disease (ICGD) at Harvard Medical School in the United States in August.",
+    url: "/dashboard/news/news-1",
   },
   {
-    title: "Lorem Ipsum 2",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
-    url: "/",
+    title: "Construction Begins on the Asia University Fengfu Health Park, Aiming for Launch in 2026",
+    desc: "Asia University invests 7.5 billion NTD in constructing the Asia University Fengfu Health Park in Fengyuan, marking the groundbreaking ceremony held on the 6th. Mayor Hsiu-Yen Lu of Taichung City expressed gratitude for Asia University's significant investment.",
+    url: "/dashboard/news/news-2",
   },
   {
-    title: "Lorem Ipsum 3",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
-    url: "/",
+    title: "Asia University is honored with the title of 2024 Best University in Asia and ranks third among private universities in Taiwan",
+    desc: "The Times Higher Education (THE) recently announced the latest ranking of 2024 Best Universities in Asia, where Asia University secured the 103rd position. Notably, Asia University performed impressively in various criteria of evaluation, with its research ranking 2nd and internationalization ranking 5th nationwide.",
+    url: "/dashboard/news/news-3",
   },
   {
-    title: "Lorem Ipsum 4",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
-    url: "/",
+    title: "Asia University has made its debut in the 2024 QS World University Subject Rankings, with its Computer Science and Medicine programs",
+    desc: "The UK Higher Education Survey Agency QS (Quacquarelli Symonds), following last June's release of the 2024 World University Rankings, saw Asian universities break into the top 1000 globally, with rankings falling within the range of 901-950. This positioned Asia University as 14th in Taiwan, 3rd among private universities, and 1st among private non-medical schools.",
+    url: "/dashboard/news/news-4",
   },
   {
-    title: "Lorem Ipsum 5",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
-    url: "/",
+    title: "Asia University Ranked No. 10th in the Most Favored and Popular Universities Category by Taiwan Corporates and Companies",
+    desc: "Asia University (AU), Taiwan, ranks 10th in the latest 2023 Corporate Favorite University Survey and enters the top 10 list for the first time. President Jeffrey J.P. Tsai states that “Asia University has made great leaps in the rankings of world universities for several consecutive years and is now a university worthy of world acclaim that continues to develop rapidly while facing the shrinking number of new students in recruitment.",
+    url: "/dashboard/news/news-5",
+  },
+  {
+    title: "Asia University conferred an honorary doctorate to Dr. Lisa Su, Chair and CEO of AMD",
+    desc: "Dr. Lisa Su, Chair and CEO of AMD in the United States, was conferred an honorary doctorate by Asia University, Taiwan. “I am honored to receive an honorary doctorate from Asia University,” said Dr. Lisa Su. “As an engineer at heart, I believe technology is critical to solving some of the most important challenges our world faces today. I am inspired by the students at Asia University, who will make up our next generation of innovators and problem solvers,” Lisa Su, Chair and CEO, AMD.",
+    url: "/dashboard/news/news-6",
+  },
+  {
+    title: "University Social Responsibility EXPO 2022",
+    desc: "This year the University Social Responsibility (USR) EXPO was held at Song Shan Cultural and Creative Park (SCCP), Taipei, on November 20th. Asia University’s USR project, Building an Elderly Dementia-Friendly Town: Dementia and Cognitive Ability x Wisdom Upgrade x Intelligent Assistance, was displayed and presented to show the project team’s strenuous efforts in working with Wufeng District, Taichung City, for the past five years",
+    url: "/dashboard/news/news-7",
+  },
+  {
+    title: "Asia University Received More Than 21 Million in MOE’s Study Abroad Grants for 2022",
+    desc: "Asia University received an over twenty-one million (NT$) subsidy from the Ministry of Education, promoting studying abroad for college students. Asia Univ. leads the list in terms of the total amount of the grants awarded among 160 universities, both public and private for the past five consecutive years.",
+    url: "/dashboard/news/news-8",
+  },
+  {
+    title: "Taiwan's First Coral Restoration NFT",
+    desc: "Asia University (AU) and Delta Electronic Foundation jointly are conducting an Earth Pulsing on ecology and art at the Asia University Museum of Modern Art, and Delta Electronic Foundation jointly are conducting an Earth Pulsing on ecology and art at the Asia University Museum of Modern Art. This exhibition is Taiwan's first initiative to create (generate) coral artworks through programming, to trade them on cryptocurrency platforms, and then to restore corals in the ocean. It is an innovative attempt to promote marine conservation.",
+    url: "/dashboard/news/news-9",
+  },
+  {
+    title: "President Jeffrey J. P. Tsai of Asia University Interviewed by Cheers Magazine",
+    desc: "President Jeffrey J.P. Tsai of Asia University was interviewed by Creative Director Fu-Yuan Hsiao for Cheers Magazine. When asked about how a university leader responsible for talent cultivation should respond to the global talent shortage, President Tsai emphasized Asia University’s dedication to becoming a world-class institution, focusing on developing lifelong",   url: "/dashboard/news/news-10",
   },
 ];
 

@@ -17,6 +17,8 @@ import LandingPeople from "~/public/icons/landing_people.svg";
 import LandingStudent from "~/public/icons/landing_student.svg";
 import { motion, useMotionValue } from "framer-motion";
 import { useState, useEffect } from "react";
+import { getNews } from "@/services/api";
+import { NewsData } from "@/interface/page";
 
 const DRAG_BUFFER = 50;
 const CARD_WIDTH = 420;
@@ -24,6 +26,7 @@ const CARD_GAP = 20;
 const VIEWPORT_CENTER = window.innerWidth / 2 - CARD_WIDTH / 2;
 
 export default function Home() {
+  const [newsData, setNewsData] = useState<NewsData[]>([]);
   const [cardIndex, setCardIndex] = useState(3);
   const [dragging, setDragging] = useState(false);
   const dragX = useMotionValue(0);
@@ -38,27 +41,40 @@ export default function Home() {
     const x = dragX.get();
 
     if (x <= -DRAG_BUFFER) {
-      setCardIndex((pv) => (pv + 1) % (newsStatic.length + 2));
+      setCardIndex((pv) => (pv + 1) % (newsData.length + 2));
     } else if (x >= DRAG_BUFFER) {
       setCardIndex(
-        (pv) => (pv - 1 + (newsStatic.length + 2)) % (newsStatic.length + 2)
+        (pv) => (pv - 1 + (newsData.length + 2)) % (newsData.length + 2)
       );
     }
   };
 
   useEffect(() => {
     if (cardIndex === 0) {
-      setCardIndex(newsStatic.length);
-    } else if (cardIndex === newsStatic.length + 1) {
+      setCardIndex(newsData.length);
+    } else if (cardIndex === newsData.length + 1) {
       setCardIndex(1);
     }
   }, [cardIndex]);
 
   const displayedCards = [
-    newsStatic[newsStatic.length - 1],
-    ...newsStatic,
-    newsStatic[0],
+    newsData[newsData.length - 1],
+    ...newsData,
+    newsData[0],
   ];
+
+  useEffect(() => {
+    fetchNews();
+  }, []);
+
+  const fetchNews = async () => {
+    try {
+      const response = await getNews({ page: "1", limitTo: "20" });
+      setNewsData(response.data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
 
   return (
     <main className="flex flex-col items-center justify-center h-fit relative overflow-hidden">
@@ -104,7 +120,13 @@ export default function Home() {
           transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
           className="absolute bottom-70 left-[5%] min-w-[1152px] w-full"
         >
-          <Image src={Clouds} alt="" width={1766} height={379} className="flex justify-center" />
+          <Image
+            src={Clouds}
+            alt=""
+            width={1766}
+            height={379}
+            className="flex justify-center"
+          />
         </motion.div>
       </section>
 
@@ -343,44 +365,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/*<section className="bg-[#3D5F4E] h-80 md:h-100 w-full mb-[75px] md:mb-[150px] overflow-visible flex items-center justify-center">
-        <motion.div
-          variants={fadeInAnimationVariationsLeft}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          custom={2}
-          className="max-w-[1063px] w-full flex justify-between items-center relative max-xl:px-5 gap-5"
-        >
-          <h1 className="absolute left-5 xl:left-0 -top-33 sm:-top-44 md:-top-16 z-10 font-black text-[46px] sm:text-[64px] leading-none text-[#65944F] mix-blend-multiply">
-            What they think
-            <br />
-            about us
-          </h1>
-          <p className="max-w-[583px] font-medium text-xl lg:text-2xl text-white">
-            Asia University is celebrated for its rapid rise in global
-            university rankings, earning praise for its academic excellence,
-            distinguished faculty, and innovative achievements. Our commitment
-            to internationalization and collaboration, coupled with an
-            award-winning, aesthetically pleasing campus, has garnered
-            admiration from educators, students, and academic leaders worldwide.
-          </p>
-          <motion.div
-            variants={fadeInAnimationVariationsScale}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            custom={5}
-            className="hidden md:block min-w-[324px] h-100 bg-graydark"
-          ></motion.div>
-          <div className="flex flex-col gap-2">
-            <div className="w-[10px] h-[10px] bg-[#8DAD63] rounded-full"></div>
-            <div className="w-[10px] h-[10px] bg-[#8DAD63] rounded-full"></div>
-            <div className="w-[10px] h-[27px] bg-[#CAFF86] rounded-full"></div>
-          </div>
-        </motion.div>
-  </section>*/}
-
       <section className="w-full px-5 flex justify-center mb-[75px] md:mb-[150px]">
         <div className="w-full flex flex-col gap-10 lg:gap-15">
           <motion.h2
@@ -406,7 +390,7 @@ export default function Home() {
             }}
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
-            className="flex items-center gap-5 text-white"
+            className="flex items-start gap-5 text-white"
           >
             {displayedCards.map((news, index) => (
               <motion.div
@@ -416,20 +400,57 @@ export default function Home() {
                 whileInView="animate"
                 viewport={{ once: true }}
                 custom={3 * index}
-                className="col-span-1 rounded-xl overflow-hidden shadow-2 min-w-100"
+                className="col-span-1 rounded-xl shadow-2 min-w-100 relative"
               >
                 <div className="text-black grid gap-4 p-6">
-                  <p className="text-sm italic">05 June 2024</p>
-                  <p className="text-2xl md:text-3xl font-black">
-                    {news.title}
+                  <p className="text-2xl md:text-3xl font-black line-clamp-3">
+                    {news?.title}
                   </p>
-                  <p className="text-lg leading-tight text-justify">
-                    {news.desc}
+                  <p className="text-lg leading-tight text-justify line-clamp-6">
+                    {news?.content}
                   </p>
                 </div>
-                <Link href={news.url}>
-                  <div className="bg-black-2 hover:bg-black transition-all text-sm font-light">
-                    <p className="w-full text-center p-2">SEE MORE</p>
+                <Link href={news?.navigateTo ? news.navigateTo : `news/${news?._id}/${index}`}>
+                  <div className="bg-[#2D937C] hover:bg-[#2D937C]/20 group transition-all text-sm font-light absolute -bottom-16 p-4 rounded-full">
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="stroke-white group-hover:stroke-[#2D937C]"
+                    >
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        {" "}
+                        <path
+                          d="M13.5 10.5L21 3"
+                          stroke=""
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>{" "}
+                        <path
+                          d="M16 3L21 3L21 8"
+                          stroke=""
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>{" "}
+                        <path
+                          d="M21 14V19C21 20.1046 20.1046 21 19 21H12H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H10"
+                          stroke=""
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>{" "}
+                      </g>
+                    </svg>
                   </div>
                 </Link>
               </motion.div>
@@ -448,58 +469,6 @@ export default function Home() {
     </main>
   );
 }
-
-const newsStatic = [
-  {
-    title: "Asia University President Jeffrey J.P. Tsai visits Harvard University in the United States to discuss research collaboration with the International Center for Genetic Disease",
-    desc: "President Jeffrey J.P. Tsai and Chair Professor Kuan-Tsae Huang from Asia University visited the International Center for Genetic Disease (ICGD) at Harvard Medical School in the United States in August.",
-    url: "/dashboard/news/news-1",
-  },
-  {
-    title: "Construction Begins on the Asia University Fengfu Health Park, Aiming for Launch in 2026",
-    desc: "Asia University invests 7.5 billion NTD in constructing the Asia University Fengfu Health Park in Fengyuan, marking the groundbreaking ceremony held on the 6th. Mayor Hsiu-Yen Lu of Taichung City expressed gratitude for Asia University's significant investment.",
-    url: "/dashboard/news/news-2",
-  },
-  {
-    title: "Asia University is honored with the title of 2024 Best University in Asia and ranks third among private universities in Taiwan",
-    desc: "The Times Higher Education (THE) recently announced the latest ranking of 2024 Best Universities in Asia, where Asia University secured the 103rd position. Notably, Asia University performed impressively in various criteria of evaluation, with its research ranking 2nd and internationalization ranking 5th nationwide.",
-    url: "/dashboard/news/news-3",
-  },
-  {
-    title: "Asia University has made its debut in the 2024 QS World University Subject Rankings, with its Computer Science and Medicine programs",
-    desc: "The UK Higher Education Survey Agency QS (Quacquarelli Symonds), following last June's release of the 2024 World University Rankings, saw Asian universities break into the top 1000 globally, with rankings falling within the range of 901-950. This positioned Asia University as 14th in Taiwan, 3rd among private universities, and 1st among private non-medical schools.",
-    url: "/dashboard/news/news-4",
-  },
-  {
-    title: "Asia University Ranked No. 10th in the Most Favored and Popular Universities Category by Taiwan Corporates and Companies",
-    desc: "Asia University (AU), Taiwan, ranks 10th in the latest 2023 Corporate Favorite University Survey and enters the top 10 list for the first time. President Jeffrey J.P. Tsai states that “Asia University has made great leaps in the rankings of world universities for several consecutive years and is now a university worthy of world acclaim that continues to develop rapidly while facing the shrinking number of new students in recruitment.",
-    url: "/dashboard/news/news-5",
-  },
-  {
-    title: "Asia University conferred an honorary doctorate to Dr. Lisa Su, Chair and CEO of AMD",
-    desc: "Dr. Lisa Su, Chair and CEO of AMD in the United States, was conferred an honorary doctorate by Asia University, Taiwan. “I am honored to receive an honorary doctorate from Asia University,” said Dr. Lisa Su. “As an engineer at heart, I believe technology is critical to solving some of the most important challenges our world faces today. I am inspired by the students at Asia University, who will make up our next generation of innovators and problem solvers,” Lisa Su, Chair and CEO, AMD.",
-    url: "/dashboard/news/news-6",
-  },
-  {
-    title: "University Social Responsibility EXPO 2022",
-    desc: "This year the University Social Responsibility (USR) EXPO was held at Song Shan Cultural and Creative Park (SCCP), Taipei, on November 20th. Asia University’s USR project, Building an Elderly Dementia-Friendly Town: Dementia and Cognitive Ability x Wisdom Upgrade x Intelligent Assistance, was displayed and presented to show the project team’s strenuous efforts in working with Wufeng District, Taichung City, for the past five years",
-    url: "/dashboard/news/news-7",
-  },
-  {
-    title: "Asia University Received More Than 21 Million in MOE’s Study Abroad Grants for 2022",
-    desc: "Asia University received an over twenty-one million (NT$) subsidy from the Ministry of Education, promoting studying abroad for college students. Asia Univ. leads the list in terms of the total amount of the grants awarded among 160 universities, both public and private for the past five consecutive years.",
-    url: "/dashboard/news/news-8",
-  },
-  {
-    title: "Taiwan's First Coral Restoration NFT",
-    desc: "Asia University (AU) and Delta Electronic Foundation jointly are conducting an Earth Pulsing on ecology and art at the Asia University Museum of Modern Art, and Delta Electronic Foundation jointly are conducting an Earth Pulsing on ecology and art at the Asia University Museum of Modern Art. This exhibition is Taiwan's first initiative to create (generate) coral artworks through programming, to trade them on cryptocurrency platforms, and then to restore corals in the ocean. It is an innovative attempt to promote marine conservation.",
-    url: "/dashboard/news/news-9",
-  },
-  {
-    title: "President Jeffrey J. P. Tsai of Asia University Interviewed by Cheers Magazine",
-    desc: "President Jeffrey J.P. Tsai of Asia University was interviewed by Creative Director Fu-Yuan Hsiao for Cheers Magazine. When asked about how a university leader responsible for talent cultivation should respond to the global talent shortage, President Tsai emphasized Asia University’s dedication to becoming a world-class institution, focusing on developing lifelong",   url: "/dashboard/news/news-10",
-  },
-];
 
 const fadeInAnimationVariationsBottom = {
   initial: {

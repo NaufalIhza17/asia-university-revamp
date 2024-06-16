@@ -55,7 +55,6 @@ export default function SignUp() {
           is_admin: res.data.is_admin,
           _id: res.data.ID,
         });
-        console.log(res.data)
         toast.success("Login successfully");
         const redirectTimer = setTimeout(() => {
           if (res.data.is_admin) {
@@ -75,7 +74,7 @@ export default function SignUp() {
         toast.error(`Login failed: ${err.response.data.message}`);
         console.log("Login Error: ", err.response.data.message);
       } else {
-        toast.error("Login failed: An unknown error occurred");
+        toast.error("Wrong email or password, try again later");
         console.log("Login Error: Unknown error", err);
       }
     }

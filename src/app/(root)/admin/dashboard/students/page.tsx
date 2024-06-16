@@ -7,14 +7,7 @@ import { useEffect, useState } from "react";
 import { deleteUser } from "@/services/api";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-interface UserData {
-  full_name: string;
-  email: string;
-  _id: string;
-  is_admin: boolean;
-  user_id: string;
-}
+import { UserData } from "@/interface/page";
 
 export default function Students() {
   const [userData, setUserData] = useState<UserData[]>([]);

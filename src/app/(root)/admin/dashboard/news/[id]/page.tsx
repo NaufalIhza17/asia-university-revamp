@@ -2,17 +2,11 @@
 
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import { useState, useEffect, FormEvent } from "react";
-import { getNewsOne, editUser, editNews } from "@/services/api";
+import { getNewsOne, editNews } from "@/services/api";
 import { usePathname } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-interface NewsData {
-  _id: string;
-  title: string;
-  content: string;
-  navigateTo: string;
-}
+import { NewsData } from "@/interface/page";
 
 export default function NewsOne() {
   const [newsData, setNewsData] = useState<NewsData>();

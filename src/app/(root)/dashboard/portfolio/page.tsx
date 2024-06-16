@@ -11,28 +11,28 @@ export default function Portofolio() {
         <p className="text-[#2D937C] text-4xl font-bold">Portfolio Data</p>
       </div>
       <div>
-        <table className="table-auto border border-gray-300 rounded-lg ">
+        <table className="table-auto rounded-lg ">
           <tbody>
             <tr>
               <td
-                className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] bg-white"
+                className="text-left pl-8 pr-4 py-2 text-[#123E44]"
                 style={{ width: "200px" }}
               >
                 Name
               </td>
               <td
-                className="text-left pl-8 pr-8 py-2 border border-gray-300 text-[#123E44] bg-white"
+                className="text-left pl-8 pr-8 py-2 text-[#123E44]"
                 style={{ width: "80%" }}
               >
                 {user?.full_name}
               </td>
             </tr>
-            <tr className="bg-[#F0F0F0]">
-              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44]">
+            <tr className="bg-white">
+              <td className="text-left pl-8 pr-4 py-2 text-[#123E44]">
                 Student ID
               </td>
               <td
-                className="text-left pl-8 pr-8 py-2 border border-gray-300 text-[#123E44]"
+                className="text-left pl-8 pr-8 py-2 text-[#123E44]"
                 style={{ width: "80%" }}
               >
                 {" "}
@@ -44,49 +44,45 @@ export default function Portofolio() {
                     </p>
                   </>
                 ) : (
-                  <p className="bg-danger w-fit px-3 rounded py-1 font-medium text-white italic text-sm">
+                  <p className="bg-danger/10 w-fit px-3 rounded py-1 font-medium text-danger italic text-sm">
                     Not Verified
                   </p>
                 )}
               </td>{" "}
-              {/* Adjusted width to 80% */}
             </tr>
             <tr>
-              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] bg-white">
+              <td className="text-left pl-8 pr-4 py-2 text-[#123E44] ">
                 Email
               </td>
               <td
-                className="text-left pl-8 pr-8 py-2 border border-gray-300 text-[#123E44] bg-white"
+                className="text-left pl-8 pr-8 py-2 text-[#123E44] "
                 style={{ width: "80%" }}
               >
                 {user?.email}
               </td>{" "}
-              {/* Adjusted width to 100% */}
             </tr>
-            <tr className="bg-[#F0F0F0]">
-              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44]">
+            {/* <tr className="bg-[#F0F0F0]">
+              <td className="text-left pl-8 pr-4 py-2 text-[#123E44]">
                 Academic Year
               </td>
               <td
-                className="text-left pl-8 pr-8 py-2 border border-gray-300 text-[#123E44]"
+                className="text-left pl-8 pr-8 py-2 text-[#123E44]"
                 style={{ width: "80%" }}
               >
                 Lorem Ipsum
               </td>{" "}
-              {/* Adjusted width to 80% */}
-            </tr>
-            <tr>
-              <td className="text-left pl-8 pr-4 py-2 border border-gray-300 text-[#123E44] bg-white">
+            </tr> */}
+            {/* <tr>
+              <td className="text-left pl-8 pr-4 py-2 text-[#123E44] ">
                 Semester
               </td>
               <td
-                className="text-left pl-8 pr-8 py-2 border border-gray-300 text-[#123E44] bg-white"
+                className="text-left pl-8 pr-8 py-2 text-[#123E44] "
                 style={{ width: "80%" }}
               >
                 Lorem Ipsum
               </td>{" "}
-              {/* Adjusted width to 80% */}
-            </tr>
+            </tr> */}
           </tbody>
         </table>
       </div>

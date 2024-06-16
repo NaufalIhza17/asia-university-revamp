@@ -1,12 +1,12 @@
 import { useRouter } from "next/navigation";
-import { NewsData } from "@/interface/page";
+import { CourseData } from "@/interface/page";
 
-const TableNews = ({
-  newsData,
-  onClickDelNews,
+const TableCourses = ({
+  courseData,
+  onClickDelCourse,
 }: {
-  newsData: NewsData[];
-  onClickDelNews: (newsid: string) => Promise<void>;
+  courseData: CourseData[];
+  onClickDelCourse: (courseid: string) => Promise<void>;
 }) => {
   const router = useRouter();
 
@@ -17,33 +17,53 @@ const TableNews = ({
           <thead>
             <tr className="text-left text-white bg-black">
               <th className="min-w-[150px] px-4 py-4 font-medium xl:pl-11">
-                Title
+                Name
               </th>
-              <th className="min-w-[150px] px-4 py-4 font-medium">Content</th>
-              <th className="min-w-[150px] px-4 py-4 font-medium">News URL</th>
+              <th className="min-w-[150px] px-4 py-4 font-medium">Detail</th>
+              <th className="min-w-[150px] px-4 py-4 font-medium">
+                Department
+              </th>
+              <th className="min-w-[150px] px-4 py-4 font-medium">
+                Instructor
+              </th>
+              <th className="min-w-[150px] px-4 py-4 font-medium">
+                Class Code
+              </th>
+              <th className="min-w-[150px] px-4 py-4 font-medium">
+                Course Code
+              </th>
               <th className="min-w-[150px] px-4 py-4 font-medium">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {newsData?.map((data, key) => (
+            {courseData.map((data, key) => (
               <tr key={key}>
                 <td className="border-b border-[#eee] px-4 py-5 xl:pl-11">
-                  <h5 className="font-medium text-black">{data.title}</h5>
+                  <h5 className="font-medium text-black">{data.name} <span className="font-normal italic">({data.english ? "English Class" : "Mandarin Class"})</span></h5>
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5">
-                  <p className="text-black line-clamp-5">{data.content}</p>
+                  <p className="text-black">{data.academic_year}</p>
+                  <p className="text-black">{data.degree}</p>
+                  <p className="text-black">Semester {data.semester}</p>
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5">
-                  <p className="text-black">
-                    {data.navigateTo ? data.navigateTo : "none"}
-                  </p>
+                  <p className="text-black">{data.department}</p>
+                </td>
+                <td className="border-b border-[#eee] px-4 py-5">
+                  <p className="text-black">{data.instructor}</p>
+                </td>
+                <td className="border-b border-[#eee] px-4 py-5">
+                  <p className="text-black">{data.class_code}</p>
+                </td>
+                <td className="border-b border-[#eee] px-4 py-5">
+                  <p className="text-black">{data.course_code}</p>
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5">
                   <div className="flex items-center space-x-3.5">
                     <button
                       className="hover:text-success"
                       onClick={() =>
-                        router.push(`/admin/dashboard/news/${data._id}`)
+                        router.push(`/admin/dashboard/courses/${data._id}`)
                       }
                     >
                       <svg
@@ -73,7 +93,7 @@ const TableNews = ({
                     </button>
                     <button
                       className="text-rose-500 hover:text-rose-900"
-                      onClick={() => onClickDelNews(data._id)}
+                      onClick={() => onClickDelCourse(data._id)}
                     >
                       <svg
                         className="fill-current"
@@ -112,4 +132,4 @@ const TableNews = ({
   );
 };
 
-export default TableNews;
+export default TableCourses;

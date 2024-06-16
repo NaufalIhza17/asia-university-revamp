@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { NewsData } from "@/interface/page";
+import { truncateText } from "@/hooks/truncateText";
 
 export default function NewsOne() {
   const [newsData, setNewsData] = useState<NewsData>();
@@ -22,7 +23,6 @@ export default function NewsOne() {
 
   const fetchNews = async () => {
     try {
-      console.log(lastPathName[lastPathName.length - 1]);
       const response = await getNewsOne({
         news_id: lastPathName[lastPathName.length - 1],
       });
@@ -61,21 +61,6 @@ export default function NewsOne() {
     <DefaultLayout>
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="text-black">
-        <div className="grid sm:grid-cols-2 gap-5 w-full text-center">
-          <div className="w-full p-3 sm:p-5 rounded shadow-3">
-            <p className="text-sm italic">Current Title</p>
-            <p className="text-2xl font-bold">{newsData?.title}</p>
-          </div>
-          <div className="w-full p-2 sm:p-5 rounded shadow-3">
-            <p className="text-sm italic">Current URL</p>
-            <p className="text-2xl font-bold">{newsData?.navigateTo ? newsData.navigateTo : "None"}</p>
-          </div>
-          <div className="w-full p-2 sm:p-5 rounded shadow-3 col-span-full">
-            <p className="text-sm italic pb-5">Current Content</p>
-            <p className="text-lg text-left">{newsData?.content}</p>
-          </div>
-        </div>
-
         <div className="flex flex-col py-10">
           <div className="w-full py-3 border-b">
             <h1 className="text-2xl font-bold">Edit</h1>
@@ -98,7 +83,7 @@ export default function NewsOne() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="bg-gray w-full p-2 rounded"
-                placeholder="Insert new title..."
+                placeholder={`Current Title: ${newsData?.title}`}
               />
             </div>
             <div className="flex items-center gap-4">
@@ -108,13 +93,12 @@ export default function NewsOne() {
               >
                 Change Content
               </label>
-              <input
-                type="text"
+              <textarea
                 id="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="bg-gray w-full p-2 rounded"
-                placeholder="Insert new content..."
+                className="bg-gray w-full p-2 rounded min-h-20"
+                placeholder={`Current Content: ${truncateText(newsData?.content!, 500)}`}
               />
             </div>
             <div className="flex items-center gap-4">
@@ -130,7 +114,7 @@ export default function NewsOne() {
                 value={navigateTo}
                 onChange={(e) => setNavigateTo(e.target.value)}
                 className="bg-gray w-full p-2 rounded"
-                placeholder="Insert new url..."
+                placeholder={`Current URL: ${newsData?.navigateTo ? newsData.navigateTo : "None"}`}
               />
             </div>
             <button

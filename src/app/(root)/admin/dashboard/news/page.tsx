@@ -3,16 +3,10 @@
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import TableNews from "@/components/Tables/TableNews";
 import { useState, useEffect, SyntheticEvent } from "react";
-import { getNews, newsRequest, deleteNews } from "@/services/api";
+import { getNews, newsRequest, deleteNews, getCourses } from "@/services/api";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-interface NewsData {
-  _id: string;
-  title: string;
-  content: string;
-  navigateTo: string;
-}
+import { NewsData } from "@/interface/page";
 
 export default function News() {
   const [newsData, setNewsData] = useState<NewsData[]>([]);

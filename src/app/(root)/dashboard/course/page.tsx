@@ -5,7 +5,7 @@ import getDateValue from "@/hooks/getDateValue";
 import { ReactNode, useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/hooks/cn";
-import { getCourses, getTranscript } from "@/services/api";
+import { getCourses, getTranscript, getPayment } from "@/services/api";
 import { CourseData } from "@/interface/page";
 import { CustomDropdown } from "@/components/Dropdowns/CustomDropdown";
 import { CustomCourseCard } from "@/components/Cards/CustomCourseCard";
@@ -27,6 +27,7 @@ export default function Course() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [courseData, setCourseData] = useState<CourseData[]>([]);
+  const [paymentStatus, setPaymentStatus] = useState("");
   const { user } = useUser();
 
   useEffect(() => {
@@ -55,7 +56,6 @@ export default function Course() {
     setIsLoading(true);
     try {
       const response = await getTranscript({ user_id: user?._id });
-      // console.log("initial response: ", response.data);
       const courseIds = response.data.map(
         (course: { course_id: string }) => course.course_id
       );
@@ -64,7 +64,6 @@ export default function Course() {
       const filteredCourses = courseResponse.data.filter(
         (course: { _id: string }) => courseIds.includes(course._id)
       );
-      // console.log("filtered: ", filteredCourses);
 
       const updatedCourseData = filteredCourses.map((course: { _id: any }) => {
         if (courseIds.includes(course._id)) {
@@ -84,7 +83,6 @@ export default function Course() {
         }
       });
 
-      // console.log("updated:  ", updatedCourseData);
       setCourseData(updatedCourseData);
       setIsLoading(false);
     } catch (error) {
@@ -95,7 +93,30 @@ export default function Course() {
 
   const handleFetchFunction = () => {
     fetchSelectedCourse();
-  } 
+  };
+
+  useEffect(() => {
+    fetchPayment();
+  }, []);
+
+  const fetchPayment = async () => {
+    try {
+      if (user?._id) {
+        const response = await getPayment({ user_id: user._id });
+        if (response.data != null) {
+          setPaymentStatus(response.data.status);
+        } else {
+          setPaymentStatus("");
+        }
+      }
+    } catch (err: any) {
+      if (err.response?.data?.message) {
+        console.log("Payment status update Error: ", err.response.data.message);
+      } else {
+        console.log("Payment status update Error: Unknown error", err);
+      }
+    }
+  };
 
   return (
     <section>
@@ -114,39 +135,47 @@ export default function Course() {
           className="absolute right-0 top-0"
         />
       </div>
-      <div className="my-7">
-        <section className="flex w-full border-b-2 border-gray relative">
-          <Tab
-            setPosition={setPosition}
-            setSelectedTab={() => setSelectedTab(0)}
-            isSelected={selectedTab === 0}
-          >
-            <p>Search Course</p>
-          </Tab>
-          <Tab
-            setPosition={setPosition}
-            setSelectedTab={() => setSelectedTab(1)}
-            isSelected={selectedTab === 1}
-          >
-            <p>Selected Course</p>
-          </Tab>
-          <Cursor position={position} />
-        </section>
-        {selectedTab === 0 ? (
-          <SearchCourse
-            isLoading={isLoading}
-            courseData={courseData}
-            user={user?._id}
-          />
-        ) : (
-          <SelectedCourse
-            isLoading={isLoading}
-            courseData={courseData}
-            user={user?._id}
-            onFetchFunction={handleFetchFunction}
-          />
-        )}
-      </div>
+      {paymentStatus === "paid" ? (
+        <div className="my-7">
+          <section className="flex w-full border-b-2 border-gray relative">
+            <Tab
+              setPosition={setPosition}
+              setSelectedTab={() => setSelectedTab(0)}
+              isSelected={selectedTab === 0}
+            >
+              <p>Search Course</p>
+            </Tab>
+            <Tab
+              setPosition={setPosition}
+              setSelectedTab={() => setSelectedTab(1)}
+              isSelected={selectedTab === 1}
+            >
+              <p>Selected Course</p>
+            </Tab>
+            <Cursor position={position} />
+          </section>
+          {selectedTab === 0 ? (
+            <SearchCourse
+              isLoading={isLoading}
+              courseData={courseData}
+              user={user?._id}
+            />
+          ) : (
+            <SelectedCourse
+              isLoading={isLoading}
+              courseData={courseData}
+              user={user?._id}
+              onFetchFunction={handleFetchFunction}
+            />
+          )}
+        </div>
+      ) : (
+        <div className="my-7">
+          <div className="bg-danger/10 px-4 py-3 rounded-md">
+            <p className="flex justify-center font-medium italic text-danger">Complete Payment or Wait for Verification</p>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

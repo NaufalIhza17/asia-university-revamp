@@ -16,6 +16,8 @@ export default function SignUp() {
   const windowWidth = useWindowWidth();
   const [isShortinHeight, setIsShortinHeight] = useState(false);
   const [isShortinWidth, setIsShortinWidth] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
   useEffect(() => {
     if (windowWidth <= 690) {
       setIsShortinWidth(true);
@@ -36,10 +38,32 @@ export default function SignUp() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
   const onClickSignUp = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    const fullNameRegex = /^[A-Z][a-z]*([ ][A-Z][a-z]*)*$/;
+    if (!fullNameRegex.test(formData.full_name)) {
+      toast.error(
+        "Full Name must start with an uppercase letter in each word."
+      );
+      return;
+    }
+
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    if (!passwordRegex.test(formData.password)) {
+      toast.error(
+        "Password must be at least 8 characters long and include both letters and numbers."
+      );
+      return;
+    }
+
+    if (!isChecked) {
+      toast.error("Please agree to the terms & policy.");
+      return;
+    }
+
     try {
       setIsLoading(true);
-      e.preventDefault();
       const res = await signupRequest(formData);
       if (res?.data?.InsertedID) {
         toast.success("Account successfully created");
@@ -62,6 +86,11 @@ export default function SignUp() {
       }
     }
   };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(e.target.checked);
+  };
+
   return (
     <main className="relative">
       <ToastContainer position="top-right" autoClose={5000} />
@@ -102,7 +131,7 @@ export default function SignUp() {
                 htmlFor="name"
                 className={cn(isShortinWidth ? `text-sm` : ``, `font-medium`)}
               >
-                Name
+                Full Name
               </label>
               <input
                 id="full_name"
@@ -111,10 +140,12 @@ export default function SignUp() {
                 required
                 placeholder="Enter your name"
                 className="border border-black/10 rounded-xl p-2 font-medium text-sm placeholder:text-black/20"
-                onChange={(e) => setFormData({
-                  ...formData,
-                  full_name: e.target.value
-                })}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    full_name: e.target.value,
+                  })
+                }
               />
               <label
                 htmlFor="email-adress"
@@ -157,7 +188,11 @@ export default function SignUp() {
                 }
               />
               <div className="flex gap-1">
-                <input type="checkbox" className="w-fit" />
+                <input
+                  type="checkbox"
+                  className="w-fit"
+                  onChange={handleCheckboxChange}
+                />
                 <p className="font-medium text-xs">
                   I agree to the{" "}
                   <a
@@ -236,12 +271,7 @@ export default function SignUp() {
             isShortinWidth ? "-top-[40%] -right-1/4" : "-right-1/4 2xl:right-0"
           )}
         >
-          <Image
-            src={SignUpBG}
-            alt=""
-            className="w-full h-full"
-            priority
-          />
+          <Image src={SignUpBG} alt="" className="w-full h-full" priority />
         </div>
       </section>
     </main>

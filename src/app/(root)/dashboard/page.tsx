@@ -10,7 +10,6 @@ import Office from "~/public/icons/office.svg";
 import Folder from "~/public/icons/folder.svg";
 import Eats from "~/public/icons/eats.svg";
 import { useUser } from "@/hooks/userContext";
-import { useEffect } from "react";
 
 export default function DashboardHome() {
   const month = getDateValue({ options: "month" });
@@ -18,12 +17,6 @@ export default function DashboardHome() {
   const year = getDateValue({ options: "year" });
   
   const { user } = useUser();
-  
-  useEffect(() => {
-    if (!user) {
-      console.log(user);
-    }
-  }, [user]);
 
   return (
     <section>
@@ -38,7 +31,7 @@ export default function DashboardHome() {
         <DashboardBannerMain
           width="392"
           height="273"
-          className="absolute right-0 top-0"
+          className="absolute right-0 bottom-0"
         />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7 mt-8">

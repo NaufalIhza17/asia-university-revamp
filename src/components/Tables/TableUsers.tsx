@@ -124,10 +124,10 @@ const TableUsers = ({
                 Student Name
               </th>
               <th className="min-w-[150px] px-4 py-4 font-medium">
-                Verify Status
+                Student Email
               </th>
               <th className="min-w-[150px] px-4 py-4 font-medium">
-                Student Email
+                Verify Status
               </th>
               <th className="min-w-[150px] px-4 py-4 font-medium">
                 Course Enrollment Status
@@ -163,6 +163,9 @@ const TableUsers = ({
                     <h5 className="font-medium text-black">{data.full_name}</h5>
                   </td>
                   <td className="border-b border-[#eee] px-4 py-5">
+                    <p className="text-black">{data.email}</p>
+                  </td>
+                  <td className="border-b border-[#eee] px-4 py-5">
                     <p
                       className={`inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium ${
                         data.user_id
@@ -172,9 +175,6 @@ const TableUsers = ({
                     >
                       {data.user_id ? data.user_id : "not verified"}
                     </p>
-                  </td>
-                  <td className="border-b border-[#eee] px-4 py-5">
-                    <p className="text-black">{data.email}</p>
                   </td>
                   <td className="border-b border-[#eee] px-4 py-5">
                     <p

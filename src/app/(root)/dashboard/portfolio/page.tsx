@@ -37,12 +37,12 @@ export default function Portofolio() {
               >
                 {" "}
                 {user?.user_id ? (
-                  <>
+                  <div className="flex gap-3">
                     <p>{user?.user_id}</p>
                     <p className="bg-success w-fit px-3 rounded py-1 font-medium text-white italic text-sm">
                       Verified
                     </p>
-                  </>
+                  </div>
                 ) : (
                   <p className="bg-danger/10 w-fit px-3 rounded py-1 font-medium text-danger italic text-sm">
                     Not Verified

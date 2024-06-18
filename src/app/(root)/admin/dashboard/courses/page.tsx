@@ -31,7 +31,6 @@ export default function Courses() {
     try {
       const response = await getCourses();
       setCoursesData(response.data);
-      console.log(response.data)
     } catch (error) {
       console.error("Error fetching courses:", error);
     }

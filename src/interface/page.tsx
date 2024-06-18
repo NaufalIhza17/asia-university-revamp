@@ -40,3 +40,10 @@ export interface PaymentData {
   payment_data?: string;
   username?: string;
 }
+
+export interface TranscriptData {
+  course_id: string;
+  ID: string;
+  gpa: number;
+  taken_in: string;
+}

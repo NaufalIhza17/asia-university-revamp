@@ -4,57 +4,76 @@ import TranscriptBannerMain from "~/public/images/transcript-banner-main.svg";
 import { getApprovedTranscript, getCourses } from "@/services/api";
 import { useUser } from "@/hooks/userContext";
 import { useEffect, useState } from "react";
-import { CourseData } from "@/interface/page";
+import { CourseData, TranscriptData } from "@/interface/page";
 import { CustomDropdown } from "@/components/Dropdowns/CustomDropdown";
 
 export default function Transcript() {
   const { user } = useUser();
   const [courseData, setCourseData] = useState<CourseData[]>([]);
+  const [approvedTranscript, setApprovedTranscript] = useState<TranscriptData[]>([]);
   const [selectedSemester, setSelectedSemester] = useState<string>("I");
-  const fetchApprovedTranscript = async () => {
-    try {
-      const response = await getApprovedTranscript({
-        user_id: user?._id,
-      });
-      const courseIds = response.data.map(
-        (course: { course_id: string }) => course.course_id
-      );
-
-      const courseResponse = await getCourses();
-      const filteredCourses = courseResponse.data.filter(
-        (course: { _id: string }) => courseIds.includes(course._id)
-      );
-
-      const updatedCourseData = filteredCourses.map((course: { _id: any }) => {
-        if (courseIds.includes(course._id)) {
-          return {
-            ...course,
-            transcript_id: response.data.find(
-              (transcript: { course_id: any }) =>
-                transcript.course_id === course._id
-            )?.ID,
-            gpa: response.data.find(
-              (transcript: { course_id: any }) =>
-                transcript.course_id === course._id
-            )?.gpa,
-            taken_in: response.data.find(
-              (transcript: { course_id: any }) =>
-                transcript.course_id === course._id
-            )?.taken_in,
-          };
-        } else {
-          return course;
+  
+  useEffect(() => {
+    const fetchApprovedTranscript = async () => {
+      try {
+        const response = await getApprovedTranscript({
+          user_id: user?._id,
+        });
+        if (!response || !response.data) {
+          throw new Error("Failed to fetch approved transcript");
         }
-      });
-      setCourseData(updatedCourseData);
-    } catch (error) {
-      console.error("Error fetching users:", error);
+        setApprovedTranscript(response.data);
+      } catch (error) {
+        console.error("Error fetching approved transcript:", error);
+      }
+    };
+
+    if (user?._id) {
+      fetchApprovedTranscript();
     }
-  };
+  }, [user]);
 
   useEffect(() => {
-    fetchApprovedTranscript();
-  }, []);
+    const fetchCourses = async () => {
+      try {
+        const courseResponse = await getCourses();
+        if (!courseResponse || !courseResponse.data) {
+          throw new Error("Failed to fetch courses");
+        }
+
+        const courseIds = approvedTranscript.map(
+          (course: { course_id: string }) => course.course_id
+        );
+
+        const filteredCourses = courseResponse.data.filter(
+          (course: { _id: string }) => courseIds.includes(course._id)
+        );
+
+        const updatedCourseData = filteredCourses.map((course: { _id: any }) => {
+          const transcript = approvedTranscript.find(
+            (transcript: { course_id: any }) => transcript.course_id === course._id
+          );
+
+          return transcript
+            ? {
+                ...course,
+                transcript_id: transcript.ID,
+                gpa: transcript.gpa,
+                taken_in: transcript.taken_in,
+              }
+            : course;
+        });
+
+        setCourseData(updatedCourseData);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    if (approvedTranscript.length > 0) {
+      fetchCourses();
+    }
+  }, [approvedTranscript]);
 
   const filteredCourseData = selectedSemester
     ? courseData.filter((course) => course.taken_in === selectedSemester)

@@ -27,12 +27,6 @@ export default function Layout({
   const { user } = useUser();
 
   useEffect(() => {
-    if (!user) {
-      console.log(user);
-    }
-  }, [user]);
-
-  useEffect(() => {
     if (!isLoggedIn) {
       Cookies.remove("ACCESS_TOKEN");
       Cookies.remove("REFRESH_TOKEN");
